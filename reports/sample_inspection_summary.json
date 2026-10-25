@@ -1,0 +1,78 @@
+{
+  "spatial_metadata": {
+    "total_sensors": 470,
+    "lat_min": 55.80500432306122,
+    "lat_max": 55.89742773704474,
+    "lon_min": -4.364622009285193,
+    "lon_max": -4.12882070743387,
+    "null_coords": 0,
+    "unique_junctions": 195
+  },
+  "sample_flows": [
+    {
+      "sensor_id": "GA0151_A",
+      "total_records": 33644,
+      "expected_hours": 35064,
+      "missing_hours": 1420,
+      "missing_percentage": 4.05,
+      "zero_flow_records": 781,
+      "zero_flow_percentage": 2.32,
+      "negative_flows": 0,
+      "mean_flow": 31.94,
+      "max_flow": 260,
+      "p50_flow": 30.0
+    },
+    {
+      "sensor_id": "GA0151_C",
+      "total_records": 33644,
+      "expected_hours": 35064,
+      "missing_hours": 1420,
+      "missing_percentage": 4.05,
+      "zero_flow_records": 208,
+      "zero_flow_percentage": 0.62,
+      "negative_flows": 0,
+      "mean_flow": 119.1,
+      "max_flow": 405,
+      "p50_flow": 126.0
+    },
+    {
+      "sensor_id": "GA0151_D",
+      "total_records": 33644,
+      "expected_hours": 35064,
+      "missing_hours": 1420,
+      "missing_percentage": 4.05,
+      "zero_flow_records": 237,
+      "zero_flow_percentage": 0.7,
+      "negative_flows": 0,
+      "mean_flow": 73.79,
+      "max_flow": 300,
+      "p50_flow": 68.0
+    },
+    {
+      "sensor_id": "GA0401_R",
+      "total_records": 33644,
+      "expected_hours": 35064,
+      "missing_hours": 1420,
+      "missing_percentage": 4.05,
+      "zero_flow_records": 2142,
+      "zero_flow_percentage": 6.37,
+      "negative_flows": 0,
+      "mean_flow": 17.74,
+      "max_flow": 168,
+      "p50_flow": 16.0
+    },
+    {
+      "sensor_id": "GA0401_S",
+      "total_records": 33644,
+      "expected_hours": 35064,
+      "missing_hours": 1420,
+      "missing_percentage": 4.05,
+      "zero_flow_records": 258,
+      "zero_flow_percentage": 0.77,
+      "negative_flows": 0,
+      "mean_flow": 78.29,
+      "max_flow": 334,
+      "p50_flow": 80.0
+    }
+  ]
+}

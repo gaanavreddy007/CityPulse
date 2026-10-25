@@ -1,0 +1,24 @@
+{
+  "project": "CITYPULSE",
+  "phase": "4.2",
+  "title": "Glasgow Central Clyde Crossing Road Network Data Source Manifest",
+  "source": "OpenStreetMap official API 0.6",
+  "endpoint": "https://api.openstreetmap.org/api/0.6/map",
+  "attribution": "OpenStreetMap contributors",
+  "license": "Open Database License (ODbL) 1.0 (http://opendatacommons.org/licenses/odbl/1-0/)",
+  "copyright": "http://www.openstreetmap.org/copyright",
+  "download_date_utc": "2026-10-25T18:45:00Z",
+  "crs": "WGS84 (EPSG:4326)",
+  "tiles": [
+    {
+      "id": "central_core",
+      "bbox": "-4.275,55.850,-4.242,55.865",
+      "desc": "Central Clyde Bridges and City Centre Corridor"
+    },
+    {
+      "id": "clyde_arc_west",
+      "bbox": "-4.290,55.850,-4.270,55.865",
+      "desc": "Western Clyde Arc and Expressway Corridor"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+edge_id,name,highway,lanes,raw_nri_seconds,normalized_nri,dist_to_sensor_meters,unobservability_factor,observability_risk_index
+BROOMIELAW_A814,Broomielaw (A814),primary,4,7125.37,1.0,429.7,0.5766,0.5766
+ARGYLE_ST_WB,Argyle Street,secondary,2,7087.64,0.9895,114.2,0.2043,0.2021
+CLYDESIDE_EXPRESSWAY_WB,Clydeside Expressway (A814 WB),trunk,3,3571.91,0.0078,659.5,0.7326,0.0057
+M8_RAMP_BROOMIELAW_OFF,M8 Off-Ramp to Broomielaw,motorway_link,2,3577.48,0.0094,376.4,0.529,0.005
+ALBERT_BRIDGE_NB,Albert Bridge,primary,2,3562.69,0.0053,914.0,0.8393,0.0044
+VICTORIA_BRIDGE_SB,Victoria Bridge,primary,2,3562.69,0.0053,657.6,0.7316,0.0039
+M8_KINGSTON_SB_1,M8 Kingston Bridge (Southbound),motorway,5,3577.48,0.0094,264.6,0.4109,0.0039
+M8_KINGSTON_NB_1,M8 Kingston Bridge (Northbound),motorway,5,3577.48,0.0094,262.4,0.4084,0.0038
+M8_RAMP_ANDERSTON_ON,M8 On-Ramp from Anderston/North St,motorway_link,2,3577.48,0.0094,251.4,0.3952,0.0037
+GEORGE_V_BRIDGE_SB,George V Bridge,primary,3,3562.69,0.0053,161.8,0.2764,0.0015
+NORTH_ST_A804_SB,North Street (A804),primary,3,3562.69,0.0053,107.7,0.1938,0.001
+GLASGOW_BRIDGE_NB,Glasgow Bridge (Jamaica Bridge),primary,4,3562.69,0.0053,101.3,0.1834,0.001
+HOPE_ST_NB,Hope Street,primary,2,3562.69,0.0053,107.9,0.1942,0.001
+NEWTON_ST_A804_NB,Newton Street (A804),primary,3,3562.69,0.0053,39.7,0.0763,0.0004
+CLYDE_ARC_NB,Clyde Arc (Squinty Bridge NB),secondary,2,3543.82,0.0,73.6,0.1369,0.0
+CLYDE_ARC_SB,Clyde Arc (Squinty Bridge SB),secondary,2,3543.82,0.0,73.6,0.1369,0.0
+ST_VINCENT_ST_WB,St Vincent Street (Westbound),secondary,2,3543.82,0.0,83.7,0.1541,0.0
+ST_VINCENT_ST_EB,St Vincent Street (Eastbound),secondary,2,3543.82,0.0,104.1,0.188,0.0
+BOTHWELL_ST,Bothwell Street,secondary,2,3543.82,0.0,277.8,0.4263,0.0
+WATERLOO_ST,Waterloo Street,secondary,2,3543.82,0.0,268.0,0.4149,0.0

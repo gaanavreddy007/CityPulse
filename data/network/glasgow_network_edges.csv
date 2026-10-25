@@ -1,0 +1,21 @@
+edge_id,u,v,u_lat,u_lon,v_lat,v_lon,name,highway,oneway,lanes
+M8_KINGSTON_NB_1,1001,1002,55.8525,-4.271,55.86,-4.2715,M8 Kingston Bridge (Northbound),motorway,True,5
+M8_KINGSTON_SB_1,1003,1004,55.86,-4.2718,55.8525,-4.2713,M8 Kingston Bridge (Southbound),motorway,True,5
+M8_RAMP_BROOMIELAW_OFF,1005,1006,55.857,-4.2712,55.8575,-4.269,M8 Off-Ramp to Broomielaw,motorway_link,True,2
+M8_RAMP_ANDERSTON_ON,1007,1008,55.861,-4.2725,55.8595,-4.2715,M8 On-Ramp from Anderston/North St,motorway_link,True,2
+GEORGE_V_BRIDGE_SB,1010,1011,55.8572,-4.2585,55.8548,-4.2575,George V Bridge,primary,True,3
+GLASGOW_BRIDGE_NB,1012,1013,55.8547,-4.2555,55.8573,-4.2562,Glasgow Bridge (Jamaica Bridge),primary,True,4
+CLYDE_ARC_NB,1014,1015,55.857,-4.2835,55.8605,-4.2825,Clyde Arc (Squinty Bridge NB),secondary,True,2
+CLYDE_ARC_SB,1015,1014,55.8605,-4.2825,55.857,-4.2835,Clyde Arc (Squinty Bridge SB),secondary,True,2
+VICTORIA_BRIDGE_SB,1016,1017,55.854,-4.249,55.8515,-4.248,Victoria Bridge,primary,True,2
+ALBERT_BRIDGE_NB,1018,1019,55.851,-4.2435,55.8538,-4.244,Albert Bridge,primary,True,2
+NEWTON_ST_A804_NB,1020,1021,55.861,-4.275,55.866,-4.2751,Newton Street (A804),primary,True,3
+NORTH_ST_A804_SB,1022,1023,55.866,-4.2735,55.861,-4.2734,North Street (A804),primary,True,3
+ST_VINCENT_ST_WB,1024,1025,55.8624,-4.268,55.8624,-4.276,St Vincent Street (Westbound),secondary,True,2
+ST_VINCENT_ST_EB,1026,1027,55.8636,-4.276,55.8636,-4.268,St Vincent Street (Eastbound),secondary,True,2
+HOPE_ST_NB,1028,1029,55.858,-4.26,55.865,-4.2598,Hope Street,primary,True,2
+ARGYLE_ST_WB,1030,1031,55.859,-4.255,55.86,-4.27,Argyle Street,secondary,False,2
+BROOMIELAW_A814,1032,1033,55.857,-4.26,55.8575,-4.275,Broomielaw (A814),primary,False,4
+CLYDESIDE_EXPRESSWAY_WB,1034,1035,55.858,-4.278,55.864,-4.31,Clydeside Expressway (A814 WB),trunk,True,3
+BOTHWELL_ST,1036,1037,55.8615,-4.26,55.8615,-4.273,Bothwell Street,secondary,True,2
+WATERLOO_ST,1038,1039,55.8605,-4.273,55.8605,-4.26,Waterloo Street,secondary,True,2
