@@ -30,3 +30,12 @@ desktop.ini
 htmlcov/
 .mypy_cache/
 .ruff_cache/
+
+# Large raw datasets & archives (preserved locally; not tracked in future git stages)
+data/raw/*.zip
+data/raw/*.tar.gz
+data/raw/*.parquet
+
+# Local logs & temporary output
+*.log
+scratch/

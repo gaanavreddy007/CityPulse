@@ -3,9 +3,9 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
-**Data Artifact:** [`reports/anomaly_benchmark_results.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/anomaly_benchmark_results.csv)  
-**Track B Artifact:** [`reports/statistical_anomalies_track_b.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/statistical_anomalies_track_b.csv)  
+**Primary Project Directory:** `./`  
+**Data Artifact:** [`reports/anomaly_benchmark_results.csv`](./anomaly_benchmark_results.csv)  
+**Track B Artifact:** [`reports/statistical_anomalies_track_b.csv`](./statistical_anomalies_track_b.csv)  
 
 ---
 
@@ -85,7 +85,7 @@ Across all models, negative calibration drift ($-30\%$) yielded near-zero recall
 
 ## 4. Track B: Unsupervised Statistical Flow Discovery
 
-Track B evaluated the uncorrupted Test split (`2022-10-01` to `2023-09-30`) to discover natural flow outliers. Key events discovered in [`reports/statistical_anomalies_track_b.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/statistical_anomalies_track_b.csv):
+Track B evaluated the uncorrupted Test split (`2022-10-01` to `2023-09-30`) to discover natural flow outliers. Key events discovered in [`reports/statistical_anomalies_track_b.csv`](./statistical_anomalies_track_b.csv):
 
 1. **Massive Nocturnal Surges on M8 Newton St Approach (`GA0151_A`):**
    - **Friday, 2022-10-07 at 01:00 AM:** Observed flow $= 193\text{ veh/hr}$ (Seasonal MAD score: $85.2$, threshold: $15.9$). Normal baseline is $< 15\text{ veh/hr}$.

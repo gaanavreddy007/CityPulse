@@ -1,7 +1,7 @@
 # CITYPULSE — PHASE 4.3: BRIDGE CLOSURE VERIFICATION & ONE-WAY COUPLET ANALYSIS
 
 **Reviewer Role:** Independent Transport-Network Modelling Reviewer  
-**Project:** CityPulse (`C:\Gaanav\Projects\CityPulse`)  
+**Project:** CityPulse (`./`)  
 **Network Dataset:** Reconstructed Glasgow Network (1,047 nodes, 1,932 edges)  
 **Evaluation Script:** `scripts/audit_separate_bridges.py` & `scripts/generate_route_examples.py`  
 **Date:** 2026-10-25  

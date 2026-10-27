@@ -1,6 +1,6 @@
 # CITYPULSE Phase 4.2: Resilience Experiment Methodology & OD Specification
 
-**Project:** `C:\Gaanav\Projects\CityPulse`  
+**Project:** `./`  
 **Milestone:** Phase 4.2 (Gate 4 Methodology)  
 **Author:** Transport-Network Data Scientist & Graph Engineer  
 **Date:** October 2026  

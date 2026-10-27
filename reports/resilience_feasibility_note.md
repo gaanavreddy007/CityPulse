@@ -3,9 +3,9 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Gate Status:** **GATE 4 PASSED** (Resilience assumptions bounded, prototype implemented and tested offline).  
-**Implementation Prototype:** [`citypulse/resilience/prototype.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/resilience/prototype.py)  
+**Implementation Prototype:** [`citypulse/resilience/prototype.py`](../citypulse/resilience/prototype.py)  
 
 ---
 
@@ -103,7 +103,7 @@ Because BPR parameters $\alpha$ and $\beta$ cannot be empirically calibrated fro
 * $\alpha \in [0.10, 0.20, 0.30]$
 * $\beta \in [1.5, 2.0, 4.0]$
 
-### Empirical Sensitivity Findings (from [`tests/test_resilience_prototype.py`](file:///C:/Gaanav/Projects/CityPulse/tests/test_resilience_prototype.py)):
+### Empirical Sensitivity Findings (from [`tests/test_resilience_prototype.py`](../tests/test_resilience_prototype.py)):
 1. Under low congestion ($q_e \ll C_e$), varying $\alpha$ and $\beta$ causes $< 5\%$ change in relative resilience rankings.
 2. Under high saturation ($q_e \to C_e$), higher $\alpha$ and $\beta$ amplify detour impedance deltas monotonically.
 3. Crucially, the **rank-order of critical links remains stable** across standard parameter ranges, proving that the model-based accessibility proxy is robust for comparative vulnerability prioritization.

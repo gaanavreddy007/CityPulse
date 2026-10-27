@@ -1,6 +1,6 @@
 # CITYPULSE Phase 4.2: Road Network Resilience Results Report
 
-**Project:** `C:\Gaanav\Projects\CityPulse`  
+**Project:** `./`  
 **Milestone:** Phase 4.2 (Gate 5 Experimental Evaluation)  
 **Author:** Transport-Network Data Scientist & Graph Engineer  
 **Date:** October 2026  
@@ -27,7 +27,7 @@ In direct contrast to the discredited Phase 4 model—which simulated disconnect
 
 ## 2. Comprehensive Experimental Results
 
-All simulations were executed across 48 distinct scenario configurations using [`scripts/run_reconstructed_resilience.py`](file:///C:/Gaanav/Projects/CityPulse/scripts/run_reconstructed_resilience.py). The machine-readable dataset is available in [`reports/phase4_2_resilience_sensitivity.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/phase4_2_resilience_sensitivity.csv).
+All simulations were executed across 48 distinct scenario configurations using [`scripts/run_reconstructed_resilience.py`](../scripts/run_reconstructed_resilience.py). The machine-readable dataset is available in [`reports/phase4_2_resilience_sensitivity.csv`](./phase4_2_resilience_sensitivity.csv).
 
 The primary results across all three OD cohorts are summarized below:
 
@@ -91,7 +91,7 @@ Under the compound scenario severing both Kingston Bridge and George V / Glasgow
 
 ## 4. Sensitivity to Disconnection Penalty Assumptions
 
-To fulfill the requirements of Gate 5, total network impedance was evaluated across four arbitrary disconnection penalties ($M \in [600\text{s}, 1800\text{s}, 3600\text{s}, 7200\text{s}]$) in [`reports/phase4_2_resilience_sensitivity.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/phase4_2_resilience_sensitivity.csv):
+To fulfill the requirements of Gate 5, total network impedance was evaluated across four arbitrary disconnection penalties ($M \in [600\text{s}, 1800\text{s}, 3600\text{s}, 7200\text{s}]$) in [`reports/phase4_2_resilience_sensitivity.csv`](./phase4_2_resilience_sensitivity.csv):
 
 | Disruption Scenario | Disconnection Penalty ($M$) | Real Detour Delay Sum (Sec) | Disconnection Penalty Sum (Sec) | Total $\Delta \mathcal{C}$ with Penalty (Sec) | Penalty Share of Metric (%) |
 |---|---|---|---|---|---|

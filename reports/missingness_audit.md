@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Gate Status:** **GATE 2 PASSED** (Data layer implemented, validated, and offline tested).
 
 ---
@@ -36,7 +36,7 @@ In the raw SCOOT flow CSV files (`flows/*.csv`), missing observations are repres
 
 ## 2. Implemented Synthetic Corruption Engine
 
-Implemented in [`citypulse/data/corruption.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/data/corruption.py), the `CorruptionEngine` applies controlled, mathematically defined perturbations exclusively to explicit copies of the **Test split**:
+Implemented in [`citypulse/data/corruption.py`](../citypulse/data/corruption.py), the `CorruptionEngine` applies controlled, mathematically defined perturbations exclusively to explicit copies of the **Test split**:
 
 ```
                        TEST SPLIT SERIES (8,760 Hours)

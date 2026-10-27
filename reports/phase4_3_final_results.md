@@ -1,7 +1,7 @@
 # CITYPULSE — PHASE 4.3: FINAL RECALIBRATED NETWORK RESILIENCE RESULTS
 
 **Reviewer Role:** Independent Transport-Network Modelling Reviewer  
-**Project:** CityPulse (`C:\Gaanav\Projects\CityPulse`)  
+**Project:** CityPulse (`./`)  
 **Network Dataset:** Reconstructed Glasgow Road Graph (`data/network/reconstructed_network_edges.csv`, 1,047 nodes, 1,932 edges)  
 **Date:** 2026-10-25  
 

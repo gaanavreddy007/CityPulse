@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Transport-Network Data Scientist & Graph Engineer (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Execution Environment:** Windows, Python 3.13.7 (64-bit)  
 **Test Framework:** Python Standard Library `unittest` (Zero external network dependencies, £0 budget)  
 **Overall Status:** **ALL 56 TESTS PASSED (100% SUCCESS RATE, ZERO FAILURES, ZERO ERRORS)**  
@@ -13,7 +13,7 @@
 ## 1. Test Suite Execution Command & Real Terminal Output
 
 ```powershell
-PS C:\Gaanav\Projects\CityPulse> python -m unittest discover tests
+PS .> python -m unittest discover tests
 ........................................................
 ----------------------------------------------------------------------
 Ran 56 tests in 7.553s

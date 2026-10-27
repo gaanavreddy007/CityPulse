@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026 (Updated with Gate 1 Counts and Gate 5 Bounded Claims)  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Protocol Status:** Pre-Registration / Protocol Design (No results fabricated)  
 
 ---
@@ -54,7 +54,7 @@ Partitions are strictly chronological and non-overlapping:
 
 ## 3. Controlled Synthetic Degradation Mechanisms (Track 1)
 
-Implemented in [`citypulse/data/corruption.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/data/corruption.py), applied exclusively to explicit copies of the Test split:
+Implemented in [`citypulse/data/corruption.py`](../citypulse/data/corruption.py), applied exclusively to explicit copies of the Test split:
 
 1. **MCAR Dropouts:** $p \in \{0.05, 0.15, 0.30\}$, stochastically setting values to `NaN`.
 2. **Burst Outages (MNAR):** $\tau \in \{4, 12, 24\}\text{ hours}$, contiguous `NaN` blocks simulating communication drops.
@@ -87,7 +87,7 @@ Implemented in [`citypulse/data/corruption.py`](file:///C:/Gaanav/Projects/CityP
 
 ## 5. Model-Based Resilience Evaluation Protocol (Track 3)
 
-Implemented in [`citypulse/resilience/prototype.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/resilience/prototype.py):
+Implemented in [`citypulse/resilience/prototype.py`](../citypulse/resilience/prototype.py):
 1. **Network Representation:** Glasgow road multigraph with capacities from WebTAG standards and free-flow times from OSM lengths/speeds.
 2. **Simulated Closures:**
    - *M8 Kingston Bridge Corridor:* Simultaneous removal of `M8_KINGSTON_NB_1`, `M8_KINGSTON_SB_1`, and access ramps.

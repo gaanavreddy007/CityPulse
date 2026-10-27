@@ -1,6 +1,6 @@
 # CITYPULSE — FINAL RESEARCH SUMMARY & SCIENTIFIC SYNTHESIS
 
-**Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Project Directory:** `./`  
 **Author:** Senior Data Scientist & Software Engineer  
 **Purpose:** Academic Review & MSc Data Science Portfolio Synthesis  
 **Dataset:** Glasgow SCOOT Traffic Flow & OpenStreetMap Central Glasgow Road Graph  
@@ -51,7 +51,7 @@ Evaluated across 900 scenario evaluations using 5 master seeds on controlled syn
 ### 3.2 Spatial Cross-Consistency Tracking (RQ2)
 Evaluated via bivariate residual analysis between spatially adjacent detector pairs (`reports/spatial_detector_threshold_analysis.csv`):
 - **False Alarm Suppression:** Bivariate spatial tracking successfully suppressed false alarms caused by severe macro-level demand drops (e.g., bank holidays, blizzard events) where all neighborhood sensors dropped concurrently.
-- **Modest Absolute Recall:** Under strict False Discovery Rate (FDR $\le 0.05$) calibration on validation data, the spatial detector achieved a recall of **31.6%** (PR-AUC $0.42$–$0.58$). While valuable as a complementary diagnostic layer, spatial correlation does **not** solve univariate blindness for subtle localized drifts.
+- **Modest Absolute Recall:** Under a 1% False Positive Rate (FPR <= 0.01) calibration on validation data, the spatial detector achieved a recall of **4.96%** (precision 10.24%, PR-AUC = 0.1035). Tuning to 5% FPR raises recall to **35.51%**, but incurs a 92.94% False Discovery Rate (precision 7.06%). While valuable as a complementary diagnostic layer, spatial correlation does **not** solve univariate blindness for subtle localized drifts.
 
 ### 3.3 Network Resilience & Directional Couplets (RQ3)
 Evaluated across 218,401 cross-river origin-destination node pairs connecting the south quadrant (250 nodes) and north quadrant (445 nodes) (`reports/phase4_3_final_results.md`):

@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Gate Status:** **GATE 1 PASSED** (Mathematically resolved, empirically verified, and regression tested).
 
 ---

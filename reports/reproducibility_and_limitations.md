@@ -1,7 +1,7 @@
 # CITYPULSE — REPRODUCIBILITY AUDIT AND METHODOLOGICAL LIMITATIONS
 
 **Reviewer Role:** Senior Data Scientist & Transport-Network Software Engineer  
-**Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Project Directory:** `./`  
 **Evaluation Scope:** MSc Data Science Research Portfolio Freeze  
 **Execution Environment:** Windows PowerShell, Python 3.13.7  
 **Date:** 2026-10-25  
@@ -63,7 +63,7 @@ These core research findings were recomputed from raw sources in the current env
 3. **Boundary Truncation Trace (`scripts/analyze_boundary_disconnect.py`):**
    - Traced the 4,125 unreachable pairs under Kingston Bridge closure to 445 northern M8 mainline nodes (ancestors collapse from 954 to 4), confirming a geographic boundary cutoff at $55.865^\circ\text{N}$.
 4. **Spatial Detector Benchmark Audit (`scripts/audit_spatial_detector.py`):**
-   - Re-evaluated the bivariate detector against `data/raw/traffic_flow_data.zip`, establishing modest recall (31.6% at 5% FDR; PR-AUC 0.42–0.58) and disproving claims of univariate blindness elimination.
+   - Re-evaluated the bivariate detector against `data/raw/traffic_flow_data.zip`, establishing modest recall (4.96% at 1% FPR, 35.51% at 5% FPR; PR-AUC = 0.1035) and disproving claims of univariate blindness elimination.
 5. **Distance & Time Trade-off Recalibration (`scripts/calculate_distance_changes.py`):**
    - Computed exact mean and maximum distance changes across all still-reachable pairs under all bridge disruptions.
 
@@ -108,7 +108,7 @@ To ensure academic rigor and avoid over-claiming on a graduate portfolio or CV, 
    - Unsupervised outlier detections (Track B) identify statistical anomalies in hourly vehicle counts.
    - They cannot be claimed as "confirmed traffic accidents" or "incidents" without ground-truth external validation against Police Scotland incident logs or Glasgow City Council maintenance records.
 3. **Spatial Cross-Consistency Detector Recall:**
-   - Bivariate spatial detection achieves an absolute recall of ~31.6% at a 5% false discovery rate (PR-AUC 0.42–0.58).
+   - Bivariate spatial detection achieves an absolute recall of 4.96% at a 1% false positive rate and 35.51% at 5% FPR (PR-AUC = 0.1035; False Discovery Rate = 92.94%).
    - Spatial correlation effectively filters out macro-level weather or holiday flow drops, but it is **not** a standalone solution for detecting subtle, localized sensor drift.
 4. **Exploratory Observability Index:**
    - The observability risk index is a heuristic formulation combining betweenness centrality and sensor spacing.
@@ -124,7 +124,7 @@ A researcher or technical interviewer can reproduce all primary outputs on a sta
 
 ```powershell
 # 1. Navigate to project root
-cd C:\Gaanav\Projects\CityPulse
+cd .
 
 # 2. Run automated test suite (56 tests)
 python -m unittest discover tests

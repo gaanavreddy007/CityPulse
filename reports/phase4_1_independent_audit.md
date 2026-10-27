@@ -1,14 +1,14 @@
 # CITYPULSE Phase 4.1: Independent Scientific Review & Validation Audit
 
-**Project:** `C:\Gaanav\Projects\CityPulse`  
+**Project:** `./`  
 **Role:** Independent Scientific Reviewer and Statistical Auditor  
 **Date:** October 2026  
 **Operating Constraints:** 100% Offline, £0 Budget, Standard Scientific Python Stack  
 **Audit Artifacts Generated:**
-- [`reports/spatial_detector_threshold_analysis.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/spatial_detector_threshold_analysis.csv) (720 evaluations across 8 thresholds, 3 corridors, 6 scenarios, 5 seeds)
-- [`reports/resilience_connectivity_sensitivity.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/resilience_connectivity_sensitivity.csv) (108 evaluations across 6 penalties, 9 BPR configurations, 2 closure scenarios)
-- [`reports/observability_sensitivity.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/observability_sensitivity.csv) (400 evaluations across 5 distance scales, 4 penalties, 20 network edges)
-- [`reports/phase4_1_test_log.md`](file:///C:/Gaanav/Projects/CityPulse/reports/phase4_1_test_log.md) (Full test log of 50 passing unit tests)
+- [`reports/spatial_detector_threshold_analysis.csv`](./spatial_detector_threshold_analysis.csv) (720 evaluations across 8 thresholds, 3 corridors, 6 scenarios, 5 seeds)
+- [`reports/resilience_connectivity_sensitivity.csv`](./resilience_connectivity_sensitivity.csv) (108 evaluations across 6 penalties, 9 BPR configurations, 2 closure scenarios)
+- [`reports/observability_sensitivity.csv`](./observability_sensitivity.csv) (400 evaluations across 5 distance scales, 4 penalties, 20 network edges)
+- [`reports/phase4_1_test_log.md`](./phase4_1_test_log.md) (Full test log of 50 passing unit tests)
 
 ---
 

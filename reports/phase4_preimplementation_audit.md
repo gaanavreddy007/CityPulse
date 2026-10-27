@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Gate Status:** **GATE 0 AUDIT PASSED (INDEPENDENTLY REPRODUCED & VERIFIED)**  
 
 ---
@@ -18,10 +18,10 @@ Every reported metric and claim from Phase 3 was recalculated directly from phys
 
 ## 2. Test Suite Execution & Output Verification
 
-The full test suite was executed offline in `C:\Gaanav\Projects\CityPulse`:
+The full test suite was executed offline in `./`:
 
 ```powershell
-PS C:\Gaanav\Projects\CityPulse> python -m unittest discover tests
+PS .> python -m unittest discover tests
 ........................................
 ----------------------------------------------------------------------
 Ran 40 tests in 7.792s
@@ -40,7 +40,7 @@ OK
 
 ## 3. Independent Recalculation of Benchmark Metrics
 
-The Phase 3 benchmark outputs were audited directly from [`reports/anomaly_benchmark_results.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/anomaly_benchmark_results.csv) and [`reports/anomaly_benchmark_summary.json`](file:///C:/Gaanav/Projects/CityPulse/reports/anomaly_benchmark_summary.json):
+The Phase 3 benchmark outputs were audited directly from [`reports/anomaly_benchmark_results.csv`](./anomaly_benchmark_results.csv) and [`reports/anomaly_benchmark_summary.json`](./anomaly_benchmark_summary.json):
 
 ### 3.1 Evaluation Count Verification
 - **Sensors:** 3 (`GA0151_A`, `GA0151_C`, `GA0401_R`).
@@ -65,7 +65,7 @@ A direct recalculation of selected metrics confirmed exact bitwise agreement:
 
 ## 4. Verification of Random Seed Mechanics & Reproducibility
 
-An inspection of the random number generation pipeline in [`citypulse/anomaly/benchmark.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/anomaly/benchmark.py) and [`citypulse/data/corruption.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/data/corruption.py) confirmed:
+An inspection of the random number generation pipeline in [`citypulse/anomaly/benchmark.py`](../citypulse/anomaly/benchmark.py) and [`citypulse/data/corruption.py`](../citypulse/data/corruption.py) confirmed:
 1. `seed` is directly passed to `get_default_models(random_state=seed)`. Specifically, `IsolationForestDetector(random_state=seed)` configures the random sub-sampling and tree partitioning of the ensemble.
 2. `seed` is directly passed to `CorruptionEngine.inject_mcar(..., seed=seed)`, configuring `rng = np.random.default_rng(seed)` for Bernoulli dropout draws.
 3. `seed` is directly passed to `CorruptionEngine.inject_burst(..., seed=seed)`, configuring the outage start index selection.
@@ -83,7 +83,7 @@ An inspection of the random number generation pipeline in [`citypulse/anomaly/be
 The Phase 3 report described the dataset as "equivalent to UTC / timezone-naive standard time." As required by Gate 0, we refine and strictly bound this definition:
 
 1. **Absence of Authoritative Timezone Headers:**
-   An inspection of the canonical raw archive [`data/raw/traffic_flow_data.zip`](file:///C:/Gaanav/Projects/CityPulse/data/raw/traffic_flow_data.zip) confirmed that the raw files contain solely two temporal columns: `date` (e.g. `2019-10-01`) and `time` (integers `0` to `23`). There are zero timezone designators, zero ISO 8601 offset strings (e.g., `+00:00` or `Z`), and zero metadata documentation files within the archive.
+   An inspection of the canonical raw archive [`data/raw/traffic_flow_data.zip`](../data/raw/traffic_flow_data.zip) confirmed that the raw files contain solely two temporal columns: `date` (e.g. `2019-10-01`) and `time` (integers `0` to `23`). There are zero timezone designators, zero ISO 8601 offset strings (e.g., `+00:00` or `Z`), and zero metadata documentation files within the archive.
 2. **Scientific Precision Rule:**
    While the dataset exhibits exactly 24 integer hour rows per day across all UK daylight saving transition dates (confirming an invariant 24-hour progression without seasonal 23-hour or 25-hour shifts), **we cannot infer UTC merely from 24 rows per day**.
    The system clock of the Glasgow SCOOT telemetry server could be UTC, or it could be GMT-locked local standard time, or a naive discrete logger clock.
@@ -94,7 +94,7 @@ The Phase 3 report described the dataset as "equivalent to UTC / timezone-naive 
 
 ## 6. Empirical Verification of August 2023 Outage in Raw Files
 
-An independent verification of the raw files inside [`traffic_flow_data.zip`](file:///C:/Gaanav/Projects/CityPulse/data/raw/traffic_flow_data.zip) directly confirmed the August 13, 2023 divergence:
+An independent verification of the raw files inside [`traffic_flow_data.zip`](../data/raw/traffic_flow_data.zip) directly confirmed the August 13, 2023 divergence:
 
 ```
 Sensor GA0151_A: total_rows = 33,644, 2023-08-13 rows = 21, hours = [3, 4, 5, 6, ...]

@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Execution Environment:** Windows, Python 3.13.7 (64-bit)  
 **Test Framework:** Standard Library `unittest` (Zero external network dependencies)  
 **Overall Status:** **ALL 40 TESTS PASSED (100% SUCCESS RATE, ZERO FAILURES)**  
@@ -13,7 +13,7 @@
 ## 1. Test Suite Execution Command & Summary Output
 
 ```powershell
-PS C:\Gaanav\Projects\CityPulse> python -m unittest discover tests
+PS .> python -m unittest discover tests
 ........................................
 ----------------------------------------------------------------------
 Ran 40 tests in 7.683s
@@ -89,7 +89,7 @@ OK
 
 ### Command Executed:
 ```powershell
-PS C:\Gaanav\Projects\CityPulse> python scripts/run_anomaly_benchmark.py
+PS .> python scripts/run_anomaly_benchmark.py
 ```
 
 ### Execution Output:
@@ -123,9 +123,9 @@ Track A completed in 11.15s (300 scenario evaluations).
 Running Track B (Unsupervised Discovery on uncorrupted Test split)...
 Track B completed: 40 top statistical anomaly records extracted.
 
-Granular Track A results saved to: C:\Gaanav\Projects\CityPulse\reports\anomaly_benchmark_results.csv
-Track B top statistical anomalies saved to: C:\Gaanav\Projects\CityPulse\reports\statistical_anomalies_track_b.csv
-Aggregate summary saved to: C:\Gaanav\Projects\CityPulse\reports\anomaly_benchmark_summary.json
+Granular Track A results saved to: .\reports\anomaly_benchmark_results.csv
+Track B top statistical anomalies saved to: .\reports\statistical_anomalies_track_b.csv
+Aggregate summary saved to: .\reports\anomaly_benchmark_summary.json
 ```
 
 All 900 scenario evaluations executed successfully with zero unhandled exceptions.

@@ -3,9 +3,9 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Gate Status:** **GATE 1 METHODOLOGY COMPLETED & VERIFIED**  
-**Associated Artifact:** [`reports/spatial_consistency_results.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/spatial_consistency_results.csv)  
+**Associated Artifact:** [`reports/spatial_consistency_results.csv`](./spatial_consistency_results.csv)  
 
 ---
 
@@ -71,7 +71,7 @@ These 9 eligible pairs form **7 distinct directed corridor groups**. However, th
 
 ## 4. Mathematical Formulation of the Spatial Detector
 
-The [`SpatialCrossConsistencyDetector`](file:///C:/Gaanav/Projects/CityPulse/citypulse/anomaly/spatial.py) operates by comparing normalized residuals rather than raw flow volumes, ensuring differing lane configurations or baseline capacities do not cause spurious alarms:
+The [`SpatialCrossConsistencyDetector`](../citypulse/anomaly/spatial.py) operates by comparing normalized residuals rather than raw flow volumes, ensuring differing lane configurations or baseline capacities do not cause spurious alarms:
 
 ### 4.1 Normalized Seasonal Residual
 For sensor $s \in \{\text{target}, \text{neighbor}\}$ at timestamp $t$ with hour-of-the-week $h(t) \in [0, 167]$:

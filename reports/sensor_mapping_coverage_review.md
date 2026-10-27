@@ -3,8 +3,8 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
-**Reviewable Artifact:** [`reports/sensor_edge_mapping.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/sensor_edge_mapping.csv)  
+**Primary Project Directory:** `./`  
+**Reviewable Artifact:** [`reports/sensor_edge_mapping.csv`](./sensor_edge_mapping.csv)  
 
 ---
 
@@ -39,7 +39,7 @@ The primary cause of the 437 unmatched sensors is the deliberate boundary defini
 ```
 
 1. **The Road Network:**
-   [`data/network/glasgow_network_edges.csv`](file:///C:/Gaanav/Projects/CityPulse/data/network/glasgow_network_edges.csv) models the **River Clyde Central Crossing Corridor**, containing 21 directed edges comprising:
+   [`data/network/glasgow_network_edges.csv`](../data/network/glasgow_network_edges.csv) models the **River Clyde Central Crossing Corridor**, containing 21 directed edges comprising:
    - M8 Kingston Bridge Northbound & Southbound plus motorway on/off slip ramps (`M8_KINGSTON_NB_1`, `M8_KINGSTON_SB_1`, `M8_RAMP_BROOMIELAW_OFF`, `M8_RAMP_ANDERSTON_ON`).
    - Major cross-river bridges: George V Bridge, Glasgow Bridge, Clyde Arc (Squinty Bridge), Victoria Bridge, and Albert Bridge.
    - Connected central approach arterials: Newton Street (A804), North Street (A804), St Vincent Street (WB & EB), Hope Street, Waterloo Street, and Broomielaw (A814).
@@ -54,7 +54,7 @@ The primary cause of the 437 unmatched sensors is the deliberate boundary defini
 
 ## 3. Coordinate Systems and Geodesic Projection Validation
 
-To ensure distances are not distorted by planar flat-earth assumptions, the distance engine in [`citypulse/map/matcher.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/map/matcher.py) implements calibrated orthogonal projection:
+To ensure distances are not distorted by planar flat-earth assumptions, the distance engine in [`citypulse/map/matcher.py`](../citypulse/map/matcher.py) implements calibrated orthogonal projection:
 
 ### 3.1 Planar Metric Metric Calibration
 At Glasgow's mean latitude ($\phi_0 \approx 55.86^\circ\text{ N}$):
@@ -85,7 +85,7 @@ A major methodological risk identified in Phase 1 was that naive nearest-neighbo
 - Forcing a 1:1 match onto the single nearest edge causes crossroad collapse.
 
 ### 4.1 Proof of Success in Central Glasgow Sample
-In [`reports/sensor_edge_mapping.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/sensor_edge_mapping.csv):
+In [`reports/sensor_edge_mapping.csv`](./sensor_edge_mapping.csv):
 1. **Junction `GA0151` Disambiguation:**
    - `GA0151_A` ($0.62\text{m}$ to `NEWTON_ST_A804_NB`) $\to$ `MATCHED_HIGH_CONFIDENCE` (Confidence: 0.88).
    - `GA0151_C` ($2.25\text{m}$ to `ST_VINCENT_ST_WB`) $\to$ `MATCHED_HIGH_CONFIDENCE` (Confidence: 0.92).

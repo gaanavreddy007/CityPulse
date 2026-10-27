@@ -50,7 +50,7 @@ Prior works and tools are categorized into four standardized tiers:
 
 ## 3. Systematic Prior-Art Findings & Overlap Matrix
 
-The table below summarizes the key works evaluated. Detailed profiles for each work are documented in [`reports/related_work.md`](file:///C:/Gaanav/Projects/CityPulse/reports/related_work.md).
+The table below summarizes the key works evaluated. Detailed profiles for each work are documented in [`reports/related_work.md`](./related_work.md).
 
 | Identifier / Project | Lead Authors / Maintainer | Year / Status | Domain / Focus | Overlap Classification | Core Distinction from CITYPULSE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -109,6 +109,6 @@ The audit confirms that the revised research question is scientifically sound, o
 ### Immediate Action Plan
 1. Establish the project workspace at `C:\Users\Admin\.gemini\antigravity-ide\scratch\citypulse`.
 2. Finalize the companion audit documents:
-   - Complete inventory and analysis of prior art in [`reports/related_work.md`](file:///C:/Gaanav/Projects/CityPulse/reports/related_work.md).
-   - Detailed mathematical formulation of the three contributions in [`reports/research_gap.md`](file:///C:/Gaanav/Projects/CityPulse/reports/research_gap.md).
+   - Complete inventory and analysis of prior art in [`reports/related_work.md`](./related_work.md).
+   - Detailed mathematical formulation of the three contributions in [`reports/research_gap.md`](./research_gap.md).
 3. Present the audit findings to the user for formal approval before initiating data pipeline construction and experimental code implementation.

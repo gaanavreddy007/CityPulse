@@ -11,7 +11,7 @@
 
 ## 1. Synthesis of Identified Research Gaps
 
-The prior-art audit across five literature domains ([`reports/related_work.md`](file:///C:/Gaanav/Projects/CityPulse/reports/related_work.md)) reveals that while traffic anomaly detection and transport network resilience are individually mature fields, their **coupling remains almost entirely unaddressed**. 
+The prior-art audit across five literature domains ([`reports/related_work.md`](./related_work.md)) reveals that while traffic anomaly detection and transport network resilience are individually mature fields, their **coupling remains almost entirely unaddressed**.
 
 ```
 ┌──────────────────────────────────────┐       ┌──────────────────────────────────────┐

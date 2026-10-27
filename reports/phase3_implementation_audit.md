@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Phase Status:** **PHASE 3 AUDIT COMPLETED & VERIFIED**  
 
 ---
@@ -47,7 +47,7 @@ The Gate 1 census established that 108 sensors contain 33,644 rows while 362 sen
 The Gate 3 candidate matcher reported that 437 sensors were classified as `UNMATCHED_DISTANCE_EXCEEDED`. An audit of the spatial data established the structural reason:
 
 1. **Graph Extent vs. Sensor Extent:**
-   - The road network file [`data/network/glasgow_network_edges.csv`](file:///C:/Gaanav/Projects/CityPulse/data/network/glasgow_network_edges.csv) contains **21 directed edges** representing the central River Clyde crossing corridor (M8 Kingston Bridge, George V Bridge, Glasgow Bridge, Clyde Arc, Victoria Bridge, Albert Bridge, and adjacent approach roads).
+   - The road network file [`data/network/glasgow_network_edges.csv`](../data/network/glasgow_network_edges.csv) contains **21 directed edges** representing the central River Clyde crossing corridor (M8 Kingston Bridge, George V Bridge, Glasgow Bridge, Clyde Arc, Victoria Bridge, Albert Bridge, and adjacent approach roads).
    - The bounding box of these 21 edges spans latitude $[55.851, 55.866]$ and longitude $[-4.283, -4.243]$ (an area of ~1.7 km $\times$ 2.5 km).
    - In contrast, the 470 SCOOT sensors in `locations.csv` span the entire Greater Glasgow metropolitan region (latitude $[55.70, 56.05]$, longitude $[-4.55, -4.00]$), reaching suburbs up to 15–20 km away (e.g., Baillieston, Scotstoun, Pollokshields, Clydebank).
 2. **Strict Distance Threshold:**
@@ -63,7 +63,7 @@ The Gate 3 candidate matcher reported that 437 sensors were classified as `UNMAT
 
 ## 4. Resilience Prototype Input Provenance
 
-An inspection of [`citypulse/resilience/prototype.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/resilience/prototype.py) was conducted to delineate empirical measurements from model parameters:
+An inspection of [`citypulse/resilience/prototype.py`](../citypulse/resilience/prototype.py) was conducted to delineate empirical measurements from model parameters:
 
 | Input Variable | Role in Model | Provenance / Source | Empirical vs. Modeled |
 | :--- | :--- | :--- | :--- |

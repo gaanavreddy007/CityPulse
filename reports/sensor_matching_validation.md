@@ -3,9 +3,9 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Gate Status:** **GATE 3 PASSED** (Candidate-based mapping implemented, ambiguity flagged, audit CSV produced).  
-**Reviewable Output:** [`reports/sensor_edge_mapping.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/sensor_edge_mapping.csv)  
+**Reviewable Output:** [`reports/sensor_edge_mapping.csv`](./sensor_edge_mapping.csv)  
 
 ---
 
@@ -16,7 +16,7 @@ Transportation research frequently forces every point sensor onto the nearest ro
 2. Approach detectors at signalized junctions are assigned to the wrong directional movement.
 3. Multi-lane approach detectors are falsely treated as multiple sensors on the same lane.
 
-To solve this, CITYPULSE implements a **Candidate-Based Matching Workflow** in [`citypulse/map/matcher.py`](file:///C:/Gaanav/Projects/CityPulse/citypulse/map/matcher.py):
+To solve this, CITYPULSE implements a **Candidate-Based Matching Workflow** in [`citypulse/map/matcher.py`](../citypulse/map/matcher.py):
 
 ```
                         DETECTOR POINT (lat, lon)
@@ -92,4 +92,4 @@ Located near the M8 Kingston Bridge northern approach, junction `GA0151` feature
 2. **Grade Separation & Flyovers:**
    Near the M8 motorway corridor, surface streets (e.g., North Street, Anderston) run directly beneath the elevated motorway box girder. At bridge abutments, a 2D surface projection could snap a surface street detector to an elevated motorway link. 3D layer tags (`layer=1`, `bridge=yes`) must be preserved during full OSM ingestion.
 3. **Manual Review Pipeline:**
-   All 14 records with `AMBIGUOUS_MULTI_CANDIDATE` are preserved in [`reports/sensor_edge_mapping.csv`](file:///C:/Gaanav/Projects/CityPulse/reports/sensor_edge_mapping.csv) and must undergo expert visual inspection before flow integration.
+   All 14 records with `AMBIGUOUS_MULTI_CANDIDATE` are preserved in [`reports/sensor_edge_mapping.csv`](./sensor_edge_mapping.csv) and must undergo expert visual inspection before flow integration.

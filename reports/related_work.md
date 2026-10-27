@@ -309,4 +309,4 @@ The audit reveals a clear pattern:
 └───────────────────────────────┴─────────────────────────────────────────────┘
 ```
 
-The detailed gap analysis and mathematical formulation of our proposed contributions are articulated in [`reports/research_gap.md`](file:///C:/Gaanav/Projects/CityPulse/reports/research_gap.md).
+The detailed gap analysis and mathematical formulation of our proposed contributions are articulated in [`reports/research_gap.md`](./research_gap.md).

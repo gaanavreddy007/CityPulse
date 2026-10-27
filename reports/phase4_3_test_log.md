@@ -1,7 +1,7 @@
 # CITYPULSE — PHASE 4.3: COMPLETE TEST LOG & REPRODUCIBILITY AUDIT
 
 **Reviewer Role:** Independent Transport-Network Modelling Reviewer  
-**Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Project Directory:** `./`  
 **Execution Environment:** Windows PowerShell, Python 3.13.7  
 **Offline Verification Mode:** Fully Offline (Zero Network / Zero External API Dependencies)  
 **Date:** 2026-10-25  

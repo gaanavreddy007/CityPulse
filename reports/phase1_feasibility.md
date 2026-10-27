@@ -3,7 +3,7 @@
 **Project Title:** CITYPULSE: Traffic-Sensor Data Quality, Urban Anomaly Detection, and Road-Network Resilience  
 **Author:** Automated Research and Pair-Programming Agent (Antigravity)  
 **Date:** October 2026 (Updated with Gate 1 Verified Counts)  
-**Primary Project Directory:** `C:\Gaanav\Projects\CityPulse`  
+**Primary Project Directory:** `./`  
 **Phase Status:** Phase 1 Completed & Verified  
 **Final Decision:** **PROCEED WITH REDESIGN** (Narrowed scope, decoupled claims, mathematically normalized observability metrics, and explicit proxy declarations).
 
@@ -78,7 +78,7 @@ Across all 470 detectors in the dataset:
 
 ## 3. Methodological Risk Assessment & Decoupling
 
-The scientific assumptions of CITYPULSE were audited in detail (see [`reports/methodology_risks.md`](file:///C:/Gaanav/Projects/CityPulse/reports/methodology_risks.md)). The key findings dictate mandatory methodology adjustments:
+The scientific assumptions of CITYPULSE were audited in detail (see [`reports/methodology_risks.md`](./methodology_risks.md)). The key findings dictate mandatory methodology adjustments:
 
 1. **Volume Counts Do Not Equal Travel Time:**
    SCOOT detectors measure *flow* ($q$, veh/hr), not speed or travel time. A BPR function requires free-flow travel time $t_0$, link capacity $C$, and shape parameters $\alpha, \beta$. Because speed is unobserved, BPR parameters cannot be calibrated empirically from volume alone; they must use standard UK WebTAG / highway engineering defaults.
@@ -137,9 +137,9 @@ The minimum viable experiment is formulated to guarantee strict reproducibility:
 ## 6. Deliverable Inventory & Next Milestones
 
 All Phase 1 & Gate 1 deliverables are prepared in `reports/`:
-* [`reports/phase1_feasibility.md`](file:///C:/Gaanav/Projects/CityPulse/reports/phase1_feasibility.md) — Overall feasibility and empirical verification.
-* [`reports/temporal_split_audit.md`](file:///C:/Gaanav/Projects/CityPulse/reports/temporal_split_audit.md) — Gate 1 temporal count discrepancy resolution.
-* [`reports/methodology_risks.md`](file:///C:/Gaanav/Projects/CityPulse/reports/methodology_risks.md) — Investigation of 7 scientific assumptions and required corrections.
-* [`reports/data_dictionary.md`](file:///C:/Gaanav/Projects/CityPulse/reports/data_dictionary.md) — Precise dataset schemas, spatial coordinates, missingness profiles, and data types.
-* [`reports/experiment_protocol.md`](file:///C:/Gaanav/Projects/CityPulse/reports/experiment_protocol.md) — Chronological train/val/test splits, perturbation specifications, and baseline models.
-* [`reports/verified_sources.md`](file:///C:/Gaanav/Projects/CityPulse/reports/verified_sources.md) — Audited bibliography verifying canonical DOIs and corrected licenses.
+* [`reports/phase1_feasibility.md`](./phase1_feasibility.md) — Overall feasibility and empirical verification.
+* [`reports/temporal_split_audit.md`](./temporal_split_audit.md) — Gate 1 temporal count discrepancy resolution.
+* [`reports/methodology_risks.md`](./methodology_risks.md) — Investigation of 7 scientific assumptions and required corrections.
+* [`reports/data_dictionary.md`](./data_dictionary.md) — Precise dataset schemas, spatial coordinates, missingness profiles, and data types.
+* [`reports/experiment_protocol.md`](./experiment_protocol.md) — Chronological train/val/test splits, perturbation specifications, and baseline models.
+* [`reports/verified_sources.md`](./verified_sources.md) — Audited bibliography verifying canonical DOIs and corrected licenses.

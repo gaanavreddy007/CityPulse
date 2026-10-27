@@ -45,11 +45,26 @@ All metrics reported below are traceable to saved output artifacts in the reposi
 ### Key Insights
 1. **Asymmetric Directional Couplet:** George V Bridge (northbound) and Glasgow Bridge (southbound) form a synchronized one-way pair. Severing George V Bridge impacts only South $\to$ North travel (+24.74 s mean on 69,693 pairs; 0 s North $\to$ South). Severing Glasgow Bridge impacts only North $\to$ South travel (+9.82 s mean on 30,488 pairs; 0 s South $\to$ North).
 2. **Resilience Redundancy:** Even under the compound closure of both George V and Glasgow Bridges, **100.0% of cross-river node pairs remain reachable** via Victoria Bridge, Albert Bridge, and Kingston Bridge.
-3. **Spatial Detector Realism:** Bivariate spatial cross-consistency tracking effectively filters out city-wide false alarms during severe weather or holiday flow drops, but achieves an absolute recall of **31.6% at 5% FDR** (PR-AUC 0.42–0.58), demonstrating that spatial correlation is a complementary filter rather than a standalone cure for localized sensor drift.
+3. **Spatial Detector Trade-Offs:** Bivariate spatial cross-consistency tracking successfully filters shared macro flow drops during severe weather and raises PR-AUC from 0.012 to **0.1035** on -50% calibration drift. Operating at a 1% False Positive Rate yields a recall of **4.96%** (precision 10.24%), while tuning to 5% FPR raises recall to **35.51%** (precision 7.06%, False Discovery Rate 92.94%). Spatial correlation serves as an effective diagnostic filter rather than a standalone automated trigger.
 
 ---
 
-## 3. Geographic Scope & Central Corridor Domain
+## 3. Visual Portfolio & Empirical Figures
+
+The following high-resolution figures illustrate the core findings of the project, generated directly from the validated project datasets:
+
+| Figure | Visual Summary | Key Scientific Takeaway |
+|:---|:---:|:---|
+| **Figure 1**<br>Road Network Topology & Grade Separation | [![Figure 1](./reports/figures/fig1_road_network_topology.png)](./reports/figures/fig1_road_network_topology.png) | **Topological Integrity:** Reconstructed 1,047 nodes and 1,932 directed links from OpenStreetMap. The elevated 10-lane M8 Kingston Bridge passes over surface streets (Broomielaw, Argyle St) with 0 shared nodes. |
+| **Figure 2**<br>River Clyde Couplet Schematic | [![Figure 2](./reports/figures/fig2_directional_couplet_schematic.png)](./reports/figures/fig2_directional_couplet_schematic.png) | **Directional Asymmetry:** King George V Bridge operates strictly northbound into Oswald St, while Glasgow Bridge operates strictly southbound into Bridge St. |
+| **Figure 3**<br>Shortest-Path Route Diversion | [![Figure 3](./reports/figures/fig3_route_diversion_george_v.png)](./reports/figures/fig3_route_diversion_george_v.png) | **Empirical Route Diversion:** When George V Bridge closes, trips from Node 100878338 to 28801025 divert to the elevated M8 Kingston Bridge (+549.2 m, +32.0 s free-flow time). |
+| **Figure 4**<br>Boundary Truncation Map | [![Figure 4](./reports/figures/fig4_boundary_truncation_map.png)](./reports/figures/fig4_boundary_truncation_map.png) | **Boundary Artifact Trace:** Truncating the network at 55.865°N isolates 445 northern M8 motorway nodes (ancestors collapse from 954 to 4), causing 4,125 unreachable pairs under Kingston Bridge closure. |
+| **Figure 5**<br>Anomaly Detection Sensitivity & Trade-offs | [![Figure 5](./reports/figures/fig5_anomaly_detection_tradeoffs.png)](./reports/figures/fig5_anomaly_detection_tradeoffs.png) | **Operational Trade-offs:** Panel A shows high sensitivity on dropouts (PR-AUC >0.88) vs low sensitivity on drift. Panel B shows that raising spatial recall above 35% triggers over 400 false alarms/yr per sensor pair. |
+| **Figure 6**<br>Cross-River Resilience Deltas | [![Figure 6](./reports/figures/fig6_cross_river_resilience_deltas.png)](./reports/figures/fig6_cross_river_resilience_deltas.png) | **Resilience Benchmark:** Quantifies directional free-flow time and distance deltas across 218,401 cross-river OD pairs, highlighting surface street vs motorway trade-offs. |
+
+---
+
+## 4. Geographic Scope & Central Corridor Domain
 
 The road graph representation is strictly bounded to the central Glasgow Clyde crossing corridor:
 - **Spatial Envelope:** Bounded by latitudes $[55.850^\circ\text{N}, 55.865^\circ\text{N}]$ and longitudes $[-4.285^\circ\text{W}, -4.240^\circ\text{W}]$.
@@ -63,12 +78,12 @@ The road graph representation is strictly bounded to the central Glasgow Clyde c
 
 ---
 
-## 4. Repository Architecture
+## 5. Repository Architecture
 
 ```text
 CityPulse/
-├── README.md                                  # Research overview, runbook, and findings
-├── .gitignore                                 # Production Git ignore rules
+├── README.md                                  # Research overview, visual portfolio, runbook, and findings
+├── .gitignore                                 # Git ignore rules (caches, virtual environments, raw archives)
 ├── citypulse/                                 # Core Python package
 │   ├── __init__.py
 │   ├── anomaly.py                             # Statistical & ML anomaly detectors
@@ -94,6 +109,17 @@ CityPulse/
 │       ├── locations.csv                      # Sensor spatial coordinates
 │       └── flows/                             # Hourly resampled flow files (33,644 rows/sensor)
 ├── reports/                                   # Audit reports & empirical result tables
+│   ├── figures/                               # Publication-grade portfolio visual plots
+│   │   ├── fig1_road_network_topology.png
+│   │   ├── fig2_directional_couplet_schematic.png
+│   │   ├── fig3_route_diversion_george_v.png
+│   │   ├── fig4_boundary_truncation_map.png
+│   │   ├── fig5_anomaly_detection_tradeoffs.png
+│   │   └── fig6_cross_river_resilience_deltas.png
+│   ├── portfolio_project_brief.md             # Concise portfolio overview & roadmap
+│   ├── portfolio_claims_audit.csv             # Claims audit table & safe wording guide
+│   ├── technical_interview_notes.md           # Technical interview defense & model Q&As
+│   ├── portfolio_visuals_plan.md              # Detailed figure specifications & data sources
 │   ├── final_research_summary.md              # Definitive research synthesis
 │   ├── reproducibility_and_limitations.md     # 4-tier verification & scientific caveats
 │   ├── final_experiment_inventory.csv         # Full audit log of all 14 project experiments
@@ -103,6 +129,7 @@ CityPulse/
 │   ├── phase4_3_routing_integrity_audit.md    # Grade separation, oneway, & parallel edge audit
 │   └── phase4_3_test_log.md                   # Automated test suite execution log
 ├── scripts/                                   # Executable reproduction and audit scripts
+│   ├── generate_portfolio_figures.py          # Generates all 6 publication figures from real data
 │   ├── build_reconstructed_graph.py           # Ingests OSM XML into validated graph CSVs
 │   ├── validate_reconstructed_graph.py        # Verifies topology, edge counts, components
 │   ├── audit_separate_bridges.py              # Evaluates directional bridge couplets
@@ -113,7 +140,7 @@ CityPulse/
 │   ├── audit_monte_carlo.py                   # Validates Latin Hypercube sample convergence
 │   └── run_anomaly_benchmark.py               # Runs baseline univariate anomaly benchmark
 └── tests/                                     # Automated unit test suite (56 passing tests)
-    ├── test_data_layer.py                     # Hourly aggregation, UTC, missingness
+    ├── test_data_layer.py                     # Hourly aggregation, nominal hours, missingness
     ├── test_corruption_engine.py              # Deterministic corruption generation
     ├── test_sensor_matcher.py                 # Spatial buffer & bearing assignment
     ├── test_bounded_resilience.py             # Pathfinding & disconnection penalties
@@ -126,14 +153,14 @@ CityPulse/
 
 ---
 
-## 5. Offline Reproduction Runbook
+## 6. Offline Reproduction Runbook
 
 The complete pipeline executes locally without external API dependencies or paid cloud services (£0 budget):
 
 ### Step 1: Run Full Automated Unit Test Suite
 ```powershell
 python -m unittest discover tests
-# Expected output: Ran 56 tests in ~8.6s — OK
+# Expected output: Ran 56 tests in ~7.8s — OK
 ```
 
 ### Step 2: Validate Road Network Topology Integrity
@@ -160,9 +187,15 @@ python scripts/analyze_boundary_disconnect.py
 # Traces unreachable motorway stubs and verifies the 55.865°N boundary cutoff
 ```
 
+### Step 6: Generate All 6 Portfolio Visual Figures
+```powershell
+python scripts/generate_portfolio_figures.py
+# Produces high-resolution PNGs in reports/figures/ directly from project data
+```
+
 ---
 
-## 6. Scientific Rigor & Methodological Limitations
+## 7. Scientific Rigor & Methodological Limitations
 
 In compliance with transport modeling and scientific software engineering best practices:
 
@@ -175,7 +208,7 @@ In compliance with transport modeling and scientific software engineering best p
 
 ---
 
-## 7. Data Provenance & Legal Licensing
+## 8. Data Provenance & Legal Licensing
 
 - **Traffic Flow Data:** Derived from Glasgow City Council SCOOT traffic counts, licensed under the [Open Government Licence (OGL) v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 - **Road Network Data:** Derived from OpenStreetMap.
