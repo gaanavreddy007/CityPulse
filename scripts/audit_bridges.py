@@ -7,7 +7,7 @@ for M8 Kingston Bridge, George V Bridge, Glasgow Bridge, and Clyde Arc.
 import os
 import pandas as pd
 
-PROJECT_ROOT = r"C:\Gaanav\Projects\CityPulse"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 edges_csv = os.path.join(PROJECT_ROOT, "data", "network", "reconstructed_network_edges.csv")
 df = pd.read_csv(edges_csv)
 

@@ -16,7 +16,7 @@ import pandas as pd
 import networkx as nx
 import numpy as np
 
-PROJECT_ROOT = r"C:\Gaanav\Projects\CityPulse"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 edges_csv = os.path.join(PROJECT_ROOT, "data", "network", "reconstructed_network_edges.csv")
 nodes_csv = os.path.join(PROJECT_ROOT, "data", "network", "reconstructed_network_nodes.csv")
 

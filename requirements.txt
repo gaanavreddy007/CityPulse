@@ -1,0 +1,30 @@
+# ============================================================================== 
+# CITYPULSE: Traffic Sensor Data Quality, Spatial Consistency & Resilience
+# Reproducible Python Dependency Manifest
+# Tested Environment: Python 3.13.7 (64-bit)
+# ============================================================================== 
+
+# Core Numerical & Tabular Data Processing
+numpy==2.2.6
+pandas==2.3.2
+scipy==1.16.2
+
+# Graph Algorithms & Road Network Topology Modeling
+networkx==3.5
+
+# Machine Learning & Anomaly / Outlier Detection
+scikit-learn==1.7.2
+pyod==3.6.7
+
+# Visual Portfolio & Publication Figure Generation
+matplotlib==3.10.6
+
+# HTTP Data Ingestion & OpenStreetMap API Utilities
+requests==2.32.5
+
+# ------------------------------------------------------------------------------ 
+# Optional Development / Test Runner
+# Note: The test suite runs natively without third-party frameworks using
+# the standard library unittest module: python -m unittest discover tests
+# ------------------------------------------------------------------------------ 
+# pytest==9.1.1

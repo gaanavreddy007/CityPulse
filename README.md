@@ -49,7 +49,22 @@ All metrics reported below are traceable to saved output artifacts in the reposi
 
 ---
 
-## 3. Visual Portfolio & Empirical Figures
+## 3. Academic Portfolio & Reviewer Guide
+
+For MSc academic examiners, technical interviewers, and data science employers evaluating research depth, methodological rigor, and code architecture, the following primary artifacts provide detailed documentation:
+
+| Portfolio Document | Format | Review Focus & Scope |
+|:---|:---:|:---|
+| [**Portfolio Project Brief**](./reports/portfolio_project_brief.md) | Markdown | High-level executive synthesis, core research findings, and technical architecture tailored for employers and academic review. |
+| [**Reproducibility & Scientific Caveats**](./reports/reproducibility_and_limitations.md) | Markdown | 4-tier reproduction protocol, negative experimental findings, calibration limits, and physical modeling boundaries. |
+| [**Portfolio Claims & Evidence Audit**](./reports/portfolio_claims_audit.csv) | CSV Catalog | Line-by-line audit mapping all portfolio claims to raw data artifacts and safe technical interview phrasing. |
+| [**Final Research Summary**](./reports/final_research_summary.md) | Markdown | Exhaustive technical synthesis across spatial consistency filtering, road graph topology, and cross-river bridge resilience. |
+| [**Technical Interview Defense Notes**](./reports/technical_interview_notes.md) | Markdown | Detailed interview talking points covering graph representation choices, boundary truncation artifacts, and detection trade-offs. |
+| [**Verified Sources & Citation Audit**](./reports/verified_sources.md) | Markdown | Primary source literature citations, DOIs (including Zenodo Glasgow SCOOT dataset), and legal licensing records. |
+
+---
+
+## 4. Visual Portfolio & Empirical Figures
 
 The following high-resolution figures illustrate the core findings of the project, generated directly from the validated project datasets:
 
@@ -64,7 +79,7 @@ The following high-resolution figures illustrate the core findings of the projec
 
 ---
 
-## 4. Geographic Scope & Central Corridor Domain
+## 5. Geographic Scope & Central Corridor Domain
 
 The road graph representation is strictly bounded to the central Glasgow Clyde crossing corridor:
 - **Spatial Envelope:** Bounded by latitudes $[55.850^\circ\text{N}, 55.865^\circ\text{N}]$ and longitudes $[-4.285^\circ\text{W}, -4.240^\circ\text{W}]$.
@@ -78,7 +93,7 @@ The road graph representation is strictly bounded to the central Glasgow Clyde c
 
 ---
 
-## 5. Repository Architecture
+## 6. Repository Architecture
 
 ```text
 CityPulse/
@@ -153,9 +168,29 @@ CityPulse/
 
 ---
 
-## 6. Offline Reproduction Runbook
+## 7. Offline Reproduction Runbook
 
 The complete pipeline executes locally without external API dependencies or paid cloud services (£0 budget):
+
+### Environment Setup & Dependencies
+
+The project is tested and verified on **Python 3.13** (specifically Python 3.13.7, 64-bit). To reproduce in an isolated environment without modifying your global Python setup:
+
+`powershell
+# 1. Clone repository and navigate to root
+cd CityPulse
+
+# 2. Create and activate an isolated virtual environment
+python -m venv .venv
+
+# On Windows (PowerShell):
+.venv\\Scripts\\Activate.ps1
+# On macOS / Linux (bash/zsh):
+# source .venv/bin/activate
+
+# 3. Install tested runtime dependencies
+pip install -r requirements.txt
+`
 
 ### Step 1: Run Full Automated Unit Test Suite
 ```powershell
@@ -195,7 +230,7 @@ python scripts/generate_portfolio_figures.py
 
 ---
 
-## 7. Scientific Rigor & Methodological Limitations
+## 8. Scientific Rigor & Methodological Limitations
 
 In compliance with transport modeling and scientific software engineering best practices:
 
@@ -208,8 +243,9 @@ In compliance with transport modeling and scientific software engineering best p
 
 ---
 
-## 8. Data Provenance & Legal Licensing
+## 9. Data Provenance & Legal Licensing
 
+- **Project Software & Codebase:** Licensed under the [MIT License](./LICENSE). Copyright (c) 2026 Gaanavaditya Reddy Morramreddygari. The MIT License applies strictly to original source code and analysis scripts in citypulse/, scripts/, and 	ests/. It does not alter the independent licences governing the third-party datasets listed in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).
 - **Traffic Flow Data:** Derived from Glasgow City Council SCOOT traffic counts, licensed under the [Open Government Licence (OGL) v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 - **Road Network Data:** Derived from OpenStreetMap.
   - Attribution: *© OpenStreetMap contributors*

@@ -15,7 +15,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import networkx as nx
 
-PROJECT_ROOT = r"C:\Gaanav\Projects\CityPulse"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 FIG_DIR = os.path.join(PROJECT_ROOT, "reports", "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 

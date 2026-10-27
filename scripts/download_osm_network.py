@@ -9,7 +9,7 @@ import sys
 import json
 import requests
 
-PROJECT_ROOT = r"C:\Gaanav\Projects\CityPulse"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 raw_osm_dir = os.path.join(PROJECT_ROOT, "data", "network", "raw_osm")
 os.makedirs(raw_osm_dir, exist_ok=True)
 

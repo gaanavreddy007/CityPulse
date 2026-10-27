@@ -107,7 +107,7 @@ All datasets are verified to be fully open-access, requiring no paid subscriptio
 The audit confirms that the revised research question is scientifically sound, occupies a verified research gap, has no direct competing implementation, and is 100% feasible under a £0 budget using the verified UBDC Glasgow SCOOT dataset and OpenStreetMap.
 
 ### Immediate Action Plan
-1. Establish the project workspace at `C:\Users\Admin\.gemini\antigravity-ide\scratch\citypulse`.
+1. Establish the project workspace at ./.
 2. Finalize the companion audit documents:
    - Complete inventory and analysis of prior art in [`reports/related_work.md`](./related_work.md).
    - Detailed mathematical formulation of the three contributions in [`reports/research_gap.md`](./research_gap.md).
