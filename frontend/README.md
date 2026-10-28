@@ -1,32 +1,40 @@
-# React + TypeScript + Vite
+# CityPulse Interactive Research Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interactive data science portfolio and research visualization web application for **CityPulse: Traffic Sensor Data Quality, Spatial Consistency & Road Network Resilience in Glasgow**.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Executive Overview**: Research questions, core metrics, directional couplet mechanics, and methodological constraints.
+- **Traffic Flow Explorer**: Interactive diurnal profiles and temporal flow traces for 10 SCOOT inductive loop detectors across Glasgow.
+- **Anomaly Detection Lab**: Benchmark tradeoffs comparing seasonal ESD, Isolation Forest, and rolling z-scores across synthetic corruption types, plus spatial cross-consistency tracking under severe weather.
+- **Network Resilience Simulator**: Comparative bridge severance scenarios across River Clyde crossings (King George V, Glasgow Bridge, M8 Kingston Bridge, Clyde Arc).
+- **Claims & Evidence Audit**: Interactive filterable verification catalog tracing every portfolio claim to saved output artifacts and safe phrasing.
+- **Publication Figures**: Full-resolution interactive lightbox viewer for all 6 publication figures.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19 + TypeScript + Vite
+- **Styling**: Vanilla CSS with modern dark glassmorphism design system
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Typography**: Inter & JetBrains Mono
 
-## Expanding the Oxlint configuration
+## Local Development
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```powershell
+cd frontend
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Production Build
+
+```powershell
+npm run build
+```
+
+Static build outputs are emitted to `frontend/dist/`.
+
+## Deployment
+
+A GitHub Actions workflow is provided in `.github/workflows/deploy-pages.yml` to automatically build and deploy to GitHub Pages upon push to `master`. Enable GitHub Pages under **Repository Settings -> Pages -> Build and deployment: Source -> GitHub Actions**.
