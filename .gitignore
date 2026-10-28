@@ -39,3 +39,6 @@ data/raw/*.parquet
 # Local logs & temporary output
 *.log
 scratch/
+
+frontend/node_modules/
+frontend/dist/
