@@ -1,93 +1,107 @@
-import React from 'react';
-import { Activity, GitBranch, Map, FlaskConical, Shield, BarChart3, BookOpen, GitFork } from 'lucide-react';
+import React, { useState } from 'react';
+import { GitFork, ExternalLink, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
   onNav: (section: string) => void;
 }
 
-const LINKS = [
-  { id: 'overview',  label: 'Overview',      icon: Activity },
-  { id: 'explorer',  label: 'Flow Explorer', icon: BarChart3 },
-  { id: 'anomaly',   label: 'Anomaly Lab',   icon: FlaskConical },
-  { id: 'network',   label: 'Network',       icon: Map },
-  { id: 'claims',    label: 'Claims Audit',  icon: Shield },
-  { id: 'figures',   label: 'Figures',       icon: BookOpen },
+const SECTIONS = [
+  { id: 'overview', label: '1. Overview' },
+  { id: 'explorer', label: '2. Sensor Flow' },
+  { id: 'anomaly', label: '3. Anomaly Benchmarks' },
+  { id: 'network', label: '4. Network Resilience' },
+  { id: 'claims', label: '5. Claims & Evidence' },
+  { id: 'figures', label: '6. Figures & Data' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNav }) => {
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
-        {/* Logo */}
-        <button onClick={() => onNav('overview')} className="flex items-center gap-2 group">
-          <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
-          <span className="text-base font-bold tracking-widest text-slate-100 group-hover:text-cyan-400 transition-colors">
-            CITYPULSE
-          </span>
-          <span className="hidden sm:inline text-xs text-slate-500 font-mono ml-1">Glasgow · 2024</span>
-        </button>
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-[#FBF9F5]/95 backdrop-blur-sm border-b border-[#E5E0D8] transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        {/* Brand / Title */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => onNav('overview')}
+            className="text-left group flex items-baseline gap-2"
+          >
+            <span className="font-serif font-semibold text-lg tracking-tight text-[#111827] group-hover:text-[#C25E2E] transition-colors">
+              CITYPULSE
+            </span>
+            <span className="hidden sm:inline text-xs font-mono text-[#6B7280] uppercase tracking-wider">
+              Glasgow Mobility Research
+            </span>
+          </button>
+        </div>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-1">
-          {LINKS.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              onClick={() => onNav(id)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                activeSection === id
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
-              }`}
-            >
-              <Icon size={13} />
-              {label}
-            </button>
-          ))}
+        {/* Desktop Section Links */}
+        <div className="hidden lg:flex items-center gap-1">
+          {SECTIONS.map(({ id, label }) => {
+            const isActive = activeSection === id;
+            return (
+              <button
+                key={id}
+                onClick={() => onNav(id)}
+                className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                  isActive
+                    ? 'text-[#C25E2E] bg-[#F4F1EA] font-semibold'
+                    : 'text-[#4B5563] hover:text-[#111827] hover:bg-[#F4F1EA]/60'
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right CTA / GitHub */}
+        <div className="flex items-center gap-2">
           <a
             href="https://github.com/gaanavreddy007/CityPulse"
             target="_blank"
             rel="noreferrer"
-            className="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 transition-all"
+            className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded border border-[#D1C9BE] bg-white text-[#1F2937] hover:border-[#111827] hover:bg-[#F4F1EA] transition-all"
+            title="View Code on GitHub"
           >
-            <GitFork size={13} />
-            GitHub
+            <GitFork size={12} className="text-[#C25E2E]" />
+            <span className="hidden sm:inline">GitHub</span>
           </a>
-        </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden text-slate-400 hover:text-slate-200"
-          onClick={() => setMenuOpen(v => !v)}
-          aria-label="Toggle menu"
-        >
-          <div className="space-y-1">
-            <span className={`block w-5 h-0.5 bg-current transition-transform ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-            <span className={`block w-5 h-0.5 bg-current transition-opacity ${menuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-5 h-0.5 bg-current transition-transform ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-          </div>
-        </button>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden p-1.5 text-[#4B5563] hover:text-[#111827] rounded hover:bg-[#F4F1EA]"
+            aria-label="Toggle navigation"
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-slate-950/95 border-t border-slate-800/60 px-4 py-3 space-y-1">
-          {LINKS.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              onClick={() => { onNav(id); setMenuOpen(false); }}
-              className={`w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
-                activeSection === id
-                  ? 'bg-cyan-500/20 text-cyan-300'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
-              }`}
-            >
-              <Icon size={15} />
-              {label}
-            </button>
-          ))}
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div className="lg:hidden border-b border-[#E5E0D8] bg-[#FBF9F5] px-4 py-3 space-y-1">
+          {SECTIONS.map(({ id, label }) => {
+            const isActive = activeSection === id;
+            return (
+              <button
+                key={id}
+                onClick={() => {
+                  onNav(id);
+                  setMobileOpen(false);
+                }}
+                className={`w-full text-left px-3 py-2 text-xs font-medium rounded ${
+                  isActive
+                    ? 'text-[#C25E2E] bg-[#F4F1EA] font-semibold'
+                    : 'text-[#4B5563] hover:bg-[#F4F1EA]'
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       )}
     </nav>

@@ -1,172 +1,203 @@
 import React from 'react';
-import { Activity, GitBranch, Map, FlaskConical, ArrowRight, ExternalLink, ShieldAlert, Database, Cpu } from 'lucide-react';
-
-const STATS = [
-  { label: 'SCOOT Detectors', value: '470', unit: 'sensors', color: 'cyan' },
-  { label: 'OSM Network Nodes', value: '1,327', unit: 'nodes', color: 'violet' },
-  { label: 'OSM Network Edges', value: '3,201', unit: 'edges', color: 'violet' },
-  { label: 'Unit Tests', value: '56 / 56', unit: 'passing', color: 'emerald' },
-  { label: 'Bridge Scenarios', value: '6', unit: 'modelled', color: 'amber' },
-  { label: 'Anomaly Benchmarks', value: '60', unit: 'evaluated', color: 'rose' },
-];
-
-const PIPELINE = [
-  { icon: Database,     title: 'Data Ingestion',    desc: 'Glasgow SCOOT CSV extraction, column normalisation, timezone handling.' },
-  { icon: Activity,     title: 'EDA & Missingness', desc: 'Flow distributions, zero-flow rates, timestamp gap detection per detector.' },
-  { icon: FlaskConical, title: 'Anomaly Detection', desc: 'IQR, Z-score, CUSUM, Isolation Forest benchmarked on injected corruption.' },
-  { icon: Map,          title: 'Spatial Analysis',  desc: 'Bivariate cross-consistency across 30 detector pairs.' },
-  { icon: GitBranch,    title: 'Network Resilience',desc: 'OSM graph construction, Dijkstra routing, Monte Carlo bridge closure simulation.' },
-  { icon: Cpu,          title: 'Results & Figures', desc: '6 publication-quality figures generated and version-controlled.' },
-];
+import { ArrowDown, ArrowUpRight, Database, GitFork, ShieldCheck, FileText } from 'lucide-react';
 
 interface OverviewViewProps {
   onNav: (section: string) => void;
 }
 
+const STATS = [
+  { label: 'SCOOT Detectors', value: '470', detail: 'Inductive loop sensors across Glasgow' },
+  { label: 'OSM Graph Nodes', value: '1,327', detail: 'Topological road network junctions' },
+  { label: 'OSM Graph Edges', value: '3,201', detail: 'Directed traffic flow segments' },
+  { label: 'Closure Scenarios', value: '6', detail: 'River Clyde crossing evaluations' },
+  { label: 'Anomaly Benchmarks', value: '60', detail: 'Synthetic corruptions tested' },
+  { label: 'Unit Test Suite', value: '56 / 56', detail: '100% offline reproducible passing' },
+];
+
 export const OverviewView: React.FC<OverviewViewProps> = ({ onNav }) => {
   return (
-    <section id="overview" className="min-h-screen pt-20">
-      {/* Hero */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-slate-900/0 to-violet-950/30 pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/50 text-cyan-300 text-xs font-mono mb-6">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-              Retrospective Research · Glasgow, Scotland · 2024
-            </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold text-slate-100 leading-tight mb-6">
-              City<span className="text-cyan-400">Pulse</span>
+    <section id="overview" className="pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Research Category & Metadata Label */}
+        <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#6B7280] mb-6">
+          <span className="px-2 py-0.5 rounded bg-[#F4F1EA] text-[#C25E2E] font-semibold border border-[#E5E0D8]">
+            Academic Research Paper & Portfolio
+          </span>
+          <span>·</span>
+          <span>Glasgow, Scotland</span>
+          <span>·</span>
+          <span>SCOOT (OGL v3.0) & OSM (ODbL 1.0)</span>
+        </div>
+
+        {/* Hero Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+          <div className="lg:col-span-7">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#111827] leading-[1.15] mb-6">
+              Traffic Sensor Data Quality, Spatial Consistency & Road Network Resilience
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-4">
-              Urban Traffic Resilience Analysis of Glasgow's Road Network
-            </p>
-            <p className="text-slate-400 text-base leading-relaxed mb-8 max-w-2xl">
-              An end-to-end retrospective data science study using Glasgow SCOOT traffic-flow sensors and
-              OpenStreetMap road network data to evaluate sensor data quality, anomaly detection methods,
-              and simulated road-network resilience under bridge-closure scenarios.
+            
+            <p className="text-base sm:text-lg text-[#374151] leading-relaxed mb-6 font-normal">
+              An empirical investigation into urban traffic sensor corruption, spatial cross-consistency anomaly detection, and graph-theoretic road network resilience in central Glasgow, Scotland.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-6">
+            <div className="text-xs sm:text-sm text-[#4B5563] space-y-3 leading-relaxed mb-8 border-l-2 border-[#C25E2E] pl-4">
+              <p>
+                Urban intelligent transportation systems depend heavily on automated sensor feeds. However, real-world physical detectors face calibration drift and missingness, while simplified network models often mask critical operational vulnerabilities.
+              </p>
+              <p>
+                This portfolio provides a transparent, end-to-end evaluation: from raw SCOOT sensor counts and synthetic fault injections to directional couplet severance simulations on River Clyde bridges.
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onNav('explorer')}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-sm font-semibold hover:bg-cyan-500/30 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-white bg-[#111827] rounded hover:bg-[#1F2937] transition-colors"
               >
-                Explore Traffic Data <ArrowRight size={15} />
+                <span>Explore Sensor Data</span>
+                <ArrowDown size={14} />
               </button>
+
               <button
                 onClick={() => onNav('network')}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-violet-500/20 border border-violet-500/40 text-violet-300 text-sm font-semibold hover:bg-violet-500/30 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-[#1F2937] bg-white border border-[#D1C9BE] rounded hover:border-[#111827] hover:bg-[#F4F1EA] transition-colors"
               >
-                Network Resilience <Map size={15} />
+                <span>Network Resilience</span>
+                <ArrowDown size={14} />
               </button>
+
               <a
                 href="https://github.com/gaanavreddy007/CityPulse"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300 text-sm font-semibold hover:bg-slate-800 transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-[#4B5563] hover:text-[#111827] transition-colors"
               >
-                Source Code <ExternalLink size={15} />
+                <GitFork size={13} className="text-[#C25E2E]" />
+                <span>Source Code</span>
+                <ArrowUpRight size={12} className="opacity-60" />
               </a>
             </div>
+          </div>
 
-            {/* Non-operational disclaimer */}
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-950/30 border border-amber-800/40 text-amber-300/90 text-xs max-w-2xl">
-              <ShieldAlert size={16} className="shrink-0 mt-0.5" />
-              <span>
-                <strong>Research Notice:</strong> This is a retrospective study on historical data (Open Government Licence v3.0).
-                It does not provide live traffic monitoring, real-time routing, or operational traffic management of any kind.
-              </span>
+          {/* Restrained Visual Element Grounded in Research (Figure 1 preview) */}
+          <div className="lg:col-span-5">
+            <div className="border border-[#E5E0D8] bg-white p-3 rounded shadow-xs">
+              <div className="aspect-[4/3] bg-[#F4F1EA] overflow-hidden rounded relative flex items-center justify-center">
+                <img
+                  src="./figures/fig1_road_network_topology.png"
+                  alt="Glasgow OSM Road Network Topology"
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    // Fallback visual diagram if image path needs local preview resolution
+                    const target = e.target as HTMLImageElement;
+                    target.src = '/figures/fig1_road_network_topology.png';
+                  }}
+                />
+              </div>
+              <div className="pt-3 px-1">
+                <div className="flex items-center justify-between text-[11px] font-mono text-[#6B7280] mb-1">
+                  <span>Fig. 1 · Network Model</span>
+                  <span>1,327 nodes · 3,201 edges</span>
+                </div>
+                <p className="text-xs text-[#4B5563] leading-snug">
+                  Dijkstra road graph of central Glasgow derived from OpenStreetMap, highlighting River Clyde bridge crossings and directional couplets.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Stats strip */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {STATS.map(({ label, value, unit, color }) => (
-            <div key={label} className="rounded-xl bg-slate-900/60 border border-slate-800/60 p-4 text-center hover:border-slate-700/60 transition-all">
-              <div className={`text-2xl font-bold ${
-                color === 'cyan' ? 'text-cyan-400' :
-                color === 'violet' ? 'text-violet-400' :
-                color === 'emerald' ? 'text-emerald-400' :
-                color === 'amber' ? 'text-amber-400' : 'text-rose-400'
-              } mb-1`}>{value}</div>
-              <div className="text-xs text-slate-300 font-medium leading-tight mb-0.5">{label}</div>
-              <div className="text-xs text-slate-500">{unit}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Research Question */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="rounded-2xl bg-slate-900/60 border border-slate-800/60 p-8 md:p-10">
-          <h2 className="text-xl font-bold text-slate-100 mb-2">Research Question</h2>
-          <p className="text-slate-400 text-sm mb-6 max-w-xl">What this study set out to investigate</p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { q: 'Data Quality', desc: 'How complete and reliable are Glasgow\'s SCOOT traffic-flow observations? What are the temporal missingness patterns across 470 detectors?' },
-              { q: 'Anomaly Detection', desc: 'Which statistical and ML methods best identify both naturally occurring anomalies and deliberately injected synthetic corruption in sensor streams?' },
-              { q: 'Network Resilience', desc: 'How does simulated closure of River Clyde bridges affect modelled routing costs, unreachable pairs, and network connectivity for origin-destination flows?' },
-            ].map(({ q, desc }) => (
-              <div key={q} className="p-5 rounded-xl bg-slate-800/40 border border-slate-700/40">
-                <h3 className="text-sm font-semibold text-cyan-300 mb-3">{q}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{desc}</p>
+        {/* Evidence-Backed Metric Strip (Horizontal on desktop, responsive columns) */}
+        <div className="border-y border-[#E5E0D8] bg-white py-6 px-4 sm:px-6 rounded mb-16 shadow-xs">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-[#E5E0D8]">
+            {STATS.map(({ label, value, detail }, i) => (
+              <div key={label} className={`${i > 0 ? 'lg:pl-6' : ''} ${i > 1 ? 'pt-4 md:pt-0' : ''}`}>
+                <div className="font-serif text-2xl sm:text-3xl font-medium text-[#111827] tracking-tight mb-0.5">
+                  {value}
+                </div>
+                <div className="text-xs font-semibold text-[#1F2937] mb-1">
+                  {label}
+                </div>
+                <div className="text-[11px] text-[#6B7280] leading-snug">
+                  {detail}
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Pipeline */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 className="text-xl font-bold text-slate-100 mb-2">Research Pipeline</h2>
-        <p className="text-slate-400 text-sm mb-8">End-to-end methodology — from raw SCOOT CSV to publication figures</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {PIPELINE.map(({ icon: Icon, title, desc }, i) => (
-            <div key={title} className="flex gap-4 p-5 rounded-xl bg-slate-900/60 border border-slate-800/60 hover:border-cyan-800/40 transition-all group">
-              <div className="shrink-0 h-9 w-9 rounded-lg bg-cyan-950/60 border border-cyan-800/40 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-900/40 transition-all">
-                <Icon size={16} />
-              </div>
-              <div>
-                <div className="text-xs text-slate-500 font-mono mb-1">Step {i + 1}</div>
-                <div className="text-sm font-semibold text-slate-200 mb-1">{title}</div>
-                <div className="text-xs text-slate-400 leading-relaxed">{desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* Four Research Questions Editorial Sequence */}
+        <div className="mb-16">
+          <div className="max-w-2xl mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#C25E2E] font-semibold">
+              Research Inquiry
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl text-[#111827] mt-1 mb-3">
+              Four Core Research Questions
+            </h2>
+            <p className="text-xs sm:text-sm text-[#4B5563]">
+              The study is organized around four specific methodological and empirical questions examining sensor limits and topological vulnerabilities.
+            </p>
+          </div>
 
-      {/* Dataset context */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="rounded-2xl bg-slate-900/60 border border-slate-800/60 p-8 md:p-10">
-          <h2 className="text-xl font-bold text-slate-100 mb-6">Dataset & Provenance</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-sm font-semibold text-cyan-300 mb-3">Glasgow SCOOT Traffic Data</h3>
-              <ul className="space-y-2 text-xs text-slate-400">
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Source</span> Transport Scotland / Glasgow City Council via Zenodo</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">DOI</span> <a href="https://doi.org/10.5281/zenodo.12100278" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">10.5281/zenodo.12100278</a></li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Licence</span> Open Government Licence v3.0 (OGL)</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Measure</span> Traffic flow count (vehicles/interval) — not speed or congestion index</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Detectors</span> 470 SCOOT loop detectors across Glasgow</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-violet-300 mb-3">OpenStreetMap Road Network</h3>
-              <ul className="space-y-2 text-xs text-slate-400">
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Source</span> © OpenStreetMap contributors via OSMnx</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Licence</span> Open Database Licence (ODbL 1.0)</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Graph</span> 1,327 nodes · 3,201 edges (directed)</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Routing</span> Dijkstra shortest-path on OSM travel-time weights — not measured journey times</li>
-                <li className="flex gap-2"><span className="text-slate-600 font-mono w-20 shrink-0">Bridges</span> 6 River Clyde crossing scenarios modelled</li>
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                id: 'RQ1',
+                title: 'Sensor Fault Sensitivity',
+                desc: 'How resilient are univariate time-series anomaly detection algorithms (Rolling Z-score, Seasonal ESD, Isolation Forest, LOF) to subtle, insidious sensor degradation (multiplicative scale drift, additive bias) compared to catastrophic dropouts?',
+                badge: 'Signal Quality'
+              },
+              {
+                id: 'RQ2',
+                title: 'Spatial Cross-Consistency',
+                desc: 'Can bivariate spatial cross-consistency tracking between neighboring sensors reliably isolate localized sensor faults from city-wide macro demand fluctuations such as severe weather or holiday periods?',
+                badge: 'Spatial Analysis'
+              },
+              {
+                id: 'RQ3',
+                title: 'Network Resilience & Couplets',
+                desc: 'How resilient is the central Glasgow River Clyde crossing network to critical bridge severances, and how do asymmetric directional couplets (King George V Bridge vs. Glasgow Bridge) govern rerouting?',
+                badge: 'Graph Theory'
+              },
+              {
+                id: 'RQ4',
+                title: 'Spatial Bounding & Sensitivity',
+                desc: 'How do geographic study boundaries and network representation assumptions introduce topological edge artifacts in modelled route choices and unreachable OD node pairs?',
+                badge: 'Boundary Effects'
+              },
+            ].map(({ id, title, desc, badge }) => (
+              <div key={id} className="p-6 rounded border border-[#E5E0D8] bg-white shadow-xs">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#F4F1EA] text-[#C25E2E] border border-[#E5E0D8]">
+                    {id}
+                  </span>
+                  <span className="text-[11px] font-mono text-[#6B7280]">{badge}</span>
+                </div>
+                <h3 className="font-serif text-lg font-medium text-[#111827] mb-2">{title}</h3>
+                <p className="text-xs sm:text-sm text-[#4B5563] leading-relaxed">{desc}</p>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Research Notice / Caveat Box */}
+        <div className="border border-[#D1C9BE] bg-[#F4F1EA] p-5 rounded text-xs text-[#374151] flex items-start gap-4">
+          <div className="p-1 rounded bg-[#E5E0D8] text-[#111827] shrink-0 mt-0.5">
+            <ShieldCheck size={16} />
+          </div>
+          <div>
+            <div className="font-semibold text-[#111827] mb-1">
+              Methodological Context & Research Boundaries
+            </div>
+            <p className="leading-relaxed">
+              This portfolio is an academic research demonstration conducted on historical SCOOT observations and open cartographic data. In compliance with transport engineering standards: shortest-path calculations reflect free-flow legal speed limits (not dynamic congestion queues), and anomaly detections reflect statistical volume deviations on synthetic benchmark corruptions rather than verified live municipal hardware incidents.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );

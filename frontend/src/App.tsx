@@ -12,9 +12,7 @@ const SECTIONS = ['overview', 'explorer', 'anomaly', 'network', 'claims', 'figur
 
 function App() {
   const [activeSection, setActiveSection] = useState('overview');
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  // Intersection observer to sync navbar with scroll position
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
     SECTIONS.forEach(id => {
@@ -24,7 +22,7 @@ function App() {
         ([entry]) => {
           if (entry.isIntersecting) setActiveSection(id);
         },
-        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+        { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
       );
       obs.observe(el);
       observers.push(obs);
@@ -41,9 +39,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200">
+    <div className="min-h-screen bg-[#FBF9F5] text-[#1F2937] selection:bg-[#FBE8DE] selection:text-[#C25E2E]">
       <Navbar activeSection={activeSection} onNav={handleNav} />
-      <main>
+      <main className="divide-y divide-[#E5E0D8]">
         <OverviewView onNav={handleNav} />
         <ExplorerView />
         <AnomalyView />

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import flowSamplesRaw from '../data/flow_samples.json';
+import { Info, SlidersHorizontal } from 'lucide-react';
 
 interface DiurnalPoint { hour: number; mean: number; min: number; max: number; p50: number; p25: number; p75: number; }
 interface WeekPoint { timestamp: string; full_dt: string; flow: number; }
@@ -17,24 +18,29 @@ interface SensorData {
 const FLOW_MAP = flowSamplesRaw as Record<string, SensorData>;
 const SAMPLES: SensorData[] = Object.values(FLOW_MAP);
 const SENSOR_IDS = SAMPLES.map(s => s.id);
-const COLORS = ['#22d3ee', '#a78bfa', '#34d399', '#fb923c', '#f472b6'];
+
+// Editorial data palette: Deep Navy, Burnt Orange, Slate Green, Ochre, Rose Slate
+const PALETTE = ['#1E3A8A', '#C25E2E', '#2D6A4F', '#B45309', '#6B21A8'];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-slate-900/95 border border-slate-700 rounded-xl px-4 py-3 shadow-xl text-xs">
-      <p className="text-slate-400 mb-2 font-mono">{label}</p>
+    <div className="bg-white border border-[#D1C9BE] rounded px-3 py-2 shadow-sm text-xs font-mono">
+      <p className="text-[#6B7280] font-semibold border-b border-[#E5E0D8] pb-1 mb-1.5">{label}</p>
       {payload.map((p: any) => (
-        <p key={p.name} style={{ color: p.color }} className="mb-0.5">
-          {p.name}: <span className="font-semibold">{typeof p.value === 'number' ? p.value.toFixed(1) : p.value}</span>
-        </p>
+        <div key={p.name} className="flex items-center justify-between gap-4 py-0.5">
+          <span style={{ color: p.color }} className="font-medium">{p.name}:</span>
+          <span className="font-semibold text-[#111827]">
+            {typeof p.value === 'number' ? p.value.toFixed(1) : p.value}
+          </span>
+        </div>
       ))}
     </div>
   );
 };
 
 export const ExplorerView: React.FC = () => {
-  const [selectedIds, setSelectedIds] = useState<string[]>([SENSOR_IDS[0]]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([SENSOR_IDS[0], SENSOR_IDS[1] || SENSOR_IDS[0]]);
   const [viewMode, setViewMode] = useState<'diurnal' | 'weekly' | 'stats'>('diurnal');
 
   const toggleSensor = (id: string) => {
@@ -51,7 +57,7 @@ export const ExplorerView: React.FC = () => {
   );
 
   const diurnalData = useMemo(() => {
-    const base: Record<string, any>[] = Array.from({ length: 24 }, (_, h) => ({ hour: `${h}:00` }));
+    const base: Record<string, any>[] = Array.from({ length: 24 }, (_, h) => ({ hour: `${String(h).padStart(2, '0')}:00` }));
     selectedSamples.forEach(s => {
       s.diurnal.forEach(d => { base[d.hour][s.id] = d.mean; });
     });
@@ -59,129 +65,257 @@ export const ExplorerView: React.FC = () => {
   }, [selectedSamples]);
 
   const weeklyData = useMemo(() => {
-    return selectedSamples[0]?.week_slice.slice(0, 48).map((w, i) => {
-      const row: Record<string, any> = { t: w.timestamp };
-      selectedSamples.forEach(s => { row[s.id] = s.week_slice[i]?.flow ?? null; });
+    if (!selectedSamples.length) return [];
+    const maxLen = Math.min(48, Math.max(...selectedSamples.map(s => s.week_slice.length)));
+    return Array.from({ length: maxLen }, (_, i) => {
+      const row: Record<string, any> = { t: selectedSamples[0].week_slice[i]?.timestamp || `T${i}` };
+      selectedSamples.forEach(s => {
+        row[s.id] = s.week_slice[i]?.flow ?? null;
+      });
       return row;
-    }) ?? [];
+    });
   }, [selectedSamples]);
 
-  const statsData = useMemo(() =>
-    SAMPLES.map(s => ({
+  const statsData = useMemo(() => {
+    return selectedSamples.map(s => ({
       id: s.id,
-      'Mean Flow': +s.mean_flow.toFixed(1),
-      'Max Flow': +s.max_flow.toFixed(1),
-      'Zero Flow %': +s.zero_flow_pct.toFixed(1),
-    })),
-    []
-  );
+      'Mean Flow': parseFloat(s.mean_flow.toFixed(1)),
+      'Max Flow': s.max_flow,
+      'Zero Flow %': parseFloat(s.zero_flow_pct.toFixed(1)),
+    }));
+  }, [selectedSamples]);
 
   return (
-    <section id="explorer" className="min-h-screen pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-slate-100 mb-2">Traffic Flow Explorer</h2>
-          <p className="text-slate-400 text-sm max-w-2xl">
-            Explore SCOOT loop-detector traffic flow counts (vehicles/interval) across Glasgow.
-            Data reflects historical observations — not live telemetry. Flow is vehicle count, not speed or congestion.
+    <section id="explorer" className="py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Heading */}
+        <div className="max-w-3xl mb-8">
+          <span className="text-xs font-mono uppercase tracking-wider text-[#C25E2E] font-semibold">
+            Section 02 · Empirical Observations
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl text-[#111827] mt-1 mb-2">
+            Traffic Flow Explorer: SCOOT Inductive Detectors
+          </h2>
+          <p className="text-xs sm:text-sm text-[#4B5563] leading-relaxed">
+            Examination of baseline flow profiles across representative SCOOT detectors in Glasgow. Detectors measure traffic volume count per sampling interval under Open Government Licence (OGL v3.0).
           </p>
         </div>
 
-        {/* Sensor selector */}
-        <div className="rounded-xl bg-slate-900/60 border border-slate-800/60 p-5 mb-6">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="text-xs text-slate-400 font-medium">Select detectors (max 3):</span>
-            {SENSOR_IDS.map((id, i) => (
-              <button key={id} onClick={() => toggleSensor(id)}
-                className="px-3 py-1 rounded-full text-xs font-mono border transition-all"
-                style={selectedIds.includes(id)
-                  ? { borderColor: COLORS[i % COLORS.length] + '99', color: COLORS[i % COLORS.length], background: COLORS[i % COLORS.length] + '18' }
-                  : { borderColor: '#334155', color: '#64748b' }}
-              >{id}</button>
+        {/* View Controls & Filter Bar */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded border border-[#E5E0D8] bg-white mb-6 shadow-xs">
+          {/* Mode Switcher */}
+          <div className="flex items-center gap-1.5 border border-[#D1C9BE] p-1 rounded bg-[#F4F1EA]">
+            {[
+              { id: 'diurnal', label: 'Diurnal Profile (24h Mean)' },
+              { id: 'weekly', label: 'Weekly Continuous Slice' },
+              { id: 'stats', label: 'Detector Summary Metrics' },
+            ].map(({ id, label }) => (
+              <button
+                key={id}
+                onClick={() => setViewMode(id as any)}
+                className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                  viewMode === id
+                    ? 'bg-white text-[#111827] font-semibold shadow-xs'
+                    : 'text-[#4B5563] hover:text-[#111827]'
+                }`}
+              >
+                {label}
+              </button>
             ))}
           </div>
-          <p className="text-xs text-slate-600">Showing 5 detectors from 470 total. Full dataset: <a href="https://doi.org/10.5281/zenodo.12100278" target="_blank" rel="noreferrer" className="text-cyan-600 hover:underline">Zenodo DOI</a>.</p>
+
+          {/* Sensor Selectors */}
+          <div className="flex items-center gap-2 flex-wrap text-xs">
+            <span className="font-mono text-[#6B7280] flex items-center gap-1 text-[11px]">
+              <SlidersHorizontal size={12} /> Compare (Max 3):
+            </span>
+            {SENSOR_IDS.map(id => {
+              const isSelected = selectedIds.includes(id);
+              const colorIdx = selectedIds.indexOf(id);
+              const badgeColor = isSelected ? PALETTE[colorIdx % PALETTE.length] : undefined;
+              return (
+                <button
+                  key={id}
+                  onClick={() => toggleSensor(id)}
+                  className={`px-2.5 py-1 text-xs font-mono rounded border transition-all ${
+                    isSelected
+                      ? 'border-transparent text-white font-semibold shadow-xs'
+                      : 'border-[#D1C9BE] text-[#4B5563] bg-white hover:border-[#111827]'
+                  }`}
+                  style={isSelected ? { backgroundColor: badgeColor } : {}}
+                >
+                  {id}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* View toggle */}
-        <div className="flex gap-2 mb-6">
-          {(['diurnal', 'weekly', 'stats'] as const).map(mode => (
-            <button key={mode} onClick={() => setViewMode(mode)}
-              className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${
-                viewMode === mode ? 'bg-cyan-500/20 border border-cyan-500/40 text-cyan-300' : 'bg-slate-800/60 border border-slate-700/60 text-slate-400 hover:text-slate-200'
-              }`}>
-              {mode === 'diurnal' ? '24-hr Profile' : mode === 'weekly' ? '1-Week Slice' : 'Detector Stats'}
-            </button>
-          ))}
-        </div>
-
-        {/* Chart */}
-        <div className="rounded-xl bg-slate-900/60 border border-slate-800/60 p-6 mb-8">
+        {/* Chart Surface Container */}
+        <div className="border border-[#E5E0D8] bg-white p-6 sm:p-8 rounded shadow-xs mb-8">
           {viewMode === 'diurnal' && (
-            <>
-              <h3 className="text-sm font-semibold text-slate-200 mb-1">Mean Diurnal Traffic Flow Profile</h3>
-              <p className="text-xs text-slate-500 mb-5">Mean flow by hour of day. Source: SCOOT loop detectors (OGL v3.0).</p>
-              <ResponsiveContainer width="100%" height={320}>
-                <LineChart data={diurnalData} margin={{ top: 5, right: 20, bottom: 5, left: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                  <XAxis dataKey="hour" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                  <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} label={{ value: 'Flow (veh/interval)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 11, dx: -8 }} />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Legend wrapperStyle={{ fontSize: 12, color: '#94a3b8' }} />
-                  {selectedSamples.map((s, i) => (
-                    <Line key={s.id} type="monotone" dataKey={s.id} stroke={COLORS[i % COLORS.length]} strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
-                  ))}
-                </LineChart>
-              </ResponsiveContainer>
-            </>
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-[#E5E0D8] pb-4 mb-6 gap-2">
+                <div>
+                  <h3 className="font-serif text-lg text-[#111827]">
+                    Mean Diurnal Traffic Flow by Hour
+                  </h3>
+                  <p className="text-xs text-[#6B7280]">
+                    Aggregated vehicle count per interval across the 24-hour cycle. Clear morning and evening commuter peaks are observable.
+                  </p>
+                </div>
+                <span className="text-xs font-mono text-[#6B7280]">Unit: veh / interval</span>
+              </div>
+
+              <div className="h-[340px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={diurnalData} margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
+                    <CartesianGrid strokeDasharray="2 2" vertical={false} />
+                    <XAxis
+                      dataKey="hour"
+                      tick={{ fill: '#6B7280', fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={{ stroke: '#D1C9BE' }}
+                    />
+                    <YAxis
+                      tick={{ fill: '#6B7280', fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={{ stroke: '#D1C9BE' }}
+                      width={40}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend wrapperStyle={{ paddingTop: '16px', fontSize: '12px' }} />
+                    {selectedSamples.map((s, i) => (
+                      <Line
+                        key={s.id}
+                        type="monotone"
+                        dataKey={s.id}
+                        stroke={PALETTE[i % PALETTE.length]}
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{ r: 4 }}
+                      />
+                    ))}
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           )}
+
           {viewMode === 'weekly' && (
-            <>
-              <h3 className="text-sm font-semibold text-slate-200 mb-1">1-Week Continuous Flow Sample (first 48 intervals)</h3>
-              <p className="text-xs text-slate-500 mb-5">Raw flow values from a continuous 7-day window. Gaps indicate missing observations.</p>
-              <ResponsiveContainer width="100%" height={320}>
-                <LineChart data={weeklyData} margin={{ top: 5, right: 20, bottom: 5, left: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                  <XAxis dataKey="t" tick={{ fill: '#94a3b8', fontSize: 10 }} interval={5} />
-                  <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} label={{ value: 'Flow (veh/interval)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 11, dx: -8 }} />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Legend wrapperStyle={{ fontSize: 12, color: '#94a3b8' }} />
-                  {selectedSamples.map((s, i) => (
-                    <Line key={s.id} type="monotone" dataKey={s.id} stroke={COLORS[i % COLORS.length]} strokeWidth={1.5} dot={false} connectNulls={false} />
-                  ))}
-                </LineChart>
-              </ResponsiveContainer>
-            </>
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-[#E5E0D8] pb-4 mb-6 gap-2">
+                <div>
+                  <h3 className="font-serif text-lg text-[#111827]">
+                    Continuous 7-Day Time-Series Window
+                  </h3>
+                  <p className="text-xs text-[#6B7280]">
+                    Sequential observation trace showing weekend drops, night-time nadirs, and occasional detector dropouts.
+                  </p>
+                </div>
+                <span className="text-xs font-mono text-[#6B7280]">First 48 intervals displayed</span>
+              </div>
+
+              <div className="h-[340px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={weeklyData} margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
+                    <CartesianGrid strokeDasharray="2 2" vertical={false} />
+                    <XAxis
+                      dataKey="t"
+                      tick={{ fill: '#6B7280', fontSize: 10 }}
+                      interval={5}
+                      tickLine={false}
+                      axisLine={{ stroke: '#D1C9BE' }}
+                    />
+                    <YAxis
+                      tick={{ fill: '#6B7280', fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={{ stroke: '#D1C9BE' }}
+                      width={40}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend wrapperStyle={{ paddingTop: '16px', fontSize: '12px' }} />
+                    {selectedSamples.map((s, i) => (
+                      <Line
+                        key={s.id}
+                        type="monotone"
+                        dataKey={s.id}
+                        stroke={PALETTE[i % PALETTE.length]}
+                        strokeWidth={1.5}
+                        dot={false}
+                        connectNulls={false}
+                      />
+                    ))}
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           )}
+
           {viewMode === 'stats' && (
-            <>
-              <h3 className="text-sm font-semibold text-slate-200 mb-1">Detector Summary Statistics</h3>
-              <p className="text-xs text-slate-500 mb-5">Mean flow, max observed flow, and zero-flow percentage per detector.</p>
-              <ResponsiveContainer width="100%" height={320}>
-                <BarChart data={statsData} margin={{ top: 5, right: 20, bottom: 30, left: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                  <XAxis dataKey="id" tick={{ fill: '#94a3b8', fontSize: 10 }} angle={-20} textAnchor="end" />
-                  <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Legend wrapperStyle={{ fontSize: 12, color: '#94a3b8' }} />
-                  <Bar dataKey="Mean Flow" fill="#22d3ee" radius={[3,3,0,0]} />
-                  <Bar dataKey="Zero Flow %" fill="#f472b6" radius={[3,3,0,0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </>
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between border-b border-[#E5E0D8] pb-4 mb-6 gap-2">
+                <div>
+                  <h3 className="font-serif text-lg text-[#111827]">
+                    Comparative Detector Characteristics
+                  </h3>
+                  <p className="text-xs text-[#6B7280]">
+                    Mean flow versus zero-flow reading percentage across selected loop detectors.
+                  </p>
+                </div>
+                <span className="text-xs font-mono text-[#6B7280]">Source: Pre-processed SCOOT records</span>
+              </div>
+
+              <div className="h-[340px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={statsData} margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
+                    <CartesianGrid strokeDasharray="2 2" vertical={false} />
+                    <XAxis
+                      dataKey="id"
+                      tick={{ fill: '#6B7280', fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={{ stroke: '#D1C9BE' }}
+                    />
+                    <YAxis
+                      tick={{ fill: '#6B7280', fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={{ stroke: '#D1C9BE' }}
+                      width={40}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend wrapperStyle={{ paddingTop: '16px', fontSize: '12px' }} />
+                    <Bar dataKey="Mean Flow" fill="#1E3A8A" radius={[2, 2, 0, 0]} />
+                    <Bar dataKey="Zero Flow %" fill="#C25E2E" radius={[2, 2, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           )}
         </div>
 
-        <div className="rounded-xl bg-slate-900/40 border border-slate-800/40 p-5 text-xs text-slate-400">
-          <p className="font-semibold text-slate-300 mb-2">Methodology Notes</p>
-          <ul className="space-y-1.5 list-disc list-inside">
-            <li>Traffic flow is SCOOT vehicle count per measurement interval — not speed, density, or travel time.</li>
-            <li>Zero-flow readings may reflect low genuine traffic, detector fault, or suppressed output — they are <em>not</em> distinguished in the source data.</li>
-            <li>Missing timestamps are identified by gap detection; null values reflect genuine observation absence, not imputed zeros.</li>
-            <li>Diurnal profiles use <code className="font-mono text-slate-300">mean</code> of observed records only; missing intervals are excluded.</li>
-            <li>Source: Glasgow SCOOT dataset, DOI <a href="https://doi.org/10.5281/zenodo.12100278" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">10.5281/zenodo.12100278</a>, OGL v3.0.</li>
-          </ul>
+        {/* Editorial Field Notes / Methodology */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-[#4B5563]">
+          <div className="border border-[#E5E0D8] bg-[#F4F1EA] p-4 rounded">
+            <h4 className="font-serif font-semibold text-[#111827] text-sm mb-1">Observation Metric</h4>
+            <p className="leading-relaxed">
+              SCOOT detector counts record vehicle passes per fixed logging interval. These represent discrete flux counts rather than vehicle speed, queue occupancy, or travel-time delays.
+            </p>
+          </div>
+          <div className="border border-[#E5E0D8] bg-[#F4F1EA] p-4 rounded">
+            <h4 className="font-serif font-semibold text-[#111827] text-sm mb-1">Zero-Flow Ambiguity</h4>
+            <p className="leading-relaxed">
+              Zero-flow records can indicate genuine absence of nocturnal traffic or an unflagged sensor power failure. Raw municipal telemetry does not disambiguate these states.
+            </p>
+          </div>
+          <div className="border border-[#E5E0D8] bg-[#F4F1EA] p-4 rounded">
+            <h4 className="font-serif font-semibold text-[#111827] text-sm mb-1">Provenance</h4>
+            <p className="leading-relaxed">
+              Extracted from Zenodo archive (DOI: 10.5281/zenodo.12100278) licensed under the UK Open Government Licence v3.0 (Glasgow City Council / Transport Scotland).
+            </p>
+          </div>
         </div>
+
       </div>
     </section>
   );
