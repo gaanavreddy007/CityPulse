@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './views/Navbar';
 import { Footer } from './views/Footer';
 import { OverviewView } from './views/OverviewView';
@@ -19,9 +19,7 @@ function App() {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
         { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
       );
       obs.observe(el);
@@ -32,16 +30,20 @@ function App() {
 
   const handleNav = (section: string) => {
     const el = document.getElementById(section);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setActiveSection(section);
   };
 
   return (
-    <div className="min-h-screen bg-[#FBF9F5] text-[#1F2937] selection:bg-[#FBE8DE] selection:text-[#C25E2E]">
+    <div
+      className="min-h-screen"
+      style={{
+        backgroundColor: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+      }}
+    >
       <Navbar activeSection={activeSection} onNav={handleNav} />
-      <main className="divide-y divide-[#E5E0D8]">
+      <main>
         <OverviewView onNav={handleNav} />
         <ExplorerView />
         <AnomalyView />

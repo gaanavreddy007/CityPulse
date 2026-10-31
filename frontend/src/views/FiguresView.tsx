@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ZoomIn, X, ExternalLink, Download, FileText, BookOpen } from 'lucide-react';
+import { ZoomIn, X, ExternalLink } from 'lucide-react';
 
 interface Figure {
   id: string;
@@ -61,7 +61,31 @@ const FIGURES: Figure[] = [
   },
 ];
 
-const SECTIONS = ['all', ...new Set(FIGURES.map(f => f.section))];
+const SECTION_FILTERS = ['all', ...new Set(FIGURES.map(f => f.section))];
+
+const DATA_SOURCES = [
+  {
+    title: 'SCOOT Traffic Flow',
+    license: 'Open Government Licence (OGL v3.0)',
+    desc: 'Raw Glasgow City Council / Transport Scotland inductive loop sensor observations archived on Zenodo.',
+    link: 'https://doi.org/10.5281/zenodo.12100278',
+    linkLabel: 'DOI: 10.5281/zenodo.12100278',
+  },
+  {
+    title: 'Road Network Topology',
+    license: 'Open Database License (ODbL 1.0)',
+    desc: 'Cartographic road network graphs extracted via OSMnx. © OpenStreetMap contributors. 1,327 nodes, 3,201 edges.',
+    link: 'https://www.openstreetmap.org/copyright',
+    linkLabel: 'OSM Attribution Guidelines',
+  },
+  {
+    title: 'Software & Benchmarks',
+    license: 'MIT License (Code)',
+    desc: 'Complete Python 3.13 analysis suite, automated unit tests (56/56 passing), simulation scripts, and React web app.',
+    link: 'https://github.com/gaanavreddy007/CityPulse',
+    linkLabel: 'GitHub Repository',
+  },
+];
 
 export const FiguresView: React.FC = () => {
   const [activeSection, setActiveSection] = useState('all');
@@ -72,231 +96,166 @@ export const FiguresView: React.FC = () => {
     : FIGURES.filter(f => f.section === activeSection);
 
   return (
-    <section id="figures" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Heading */}
-        <div className="max-w-3xl mb-8">
-          <span className="text-xs font-mono uppercase tracking-wider text-[#C25E2E] font-semibold">
-            Section 06 · Publication Figures & Provenance
-          </span>
-          <h2 className="font-serif text-2xl sm:text-3xl text-[#111827] mt-1 mb-2">
-            Research Figures & Dataset Provenance
-          </h2>
-          <p className="text-xs sm:text-sm text-[#4B5563] leading-relaxed">
-            High-resolution analytical figures generated directly from the underlying Glasgow SCOOT and OpenStreetMap pipelines, alongside primary data licenses and offline reproduction protocols.
-          </p>
+    <section id="figures" className="py-24 border-t border-[#E2DDD5]">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+
+        {/* ── Section heading ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+          <div className="lg:col-span-4">
+            <div className="text-section-label mb-3">06 · Publication Figures & Provenance</div>
+            <h2 className="text-headline">Research Figures</h2>
+          </div>
+          <div className="lg:col-span-8 flex items-end">
+            <p className="text-sm text-[#4A5568] leading-relaxed max-w-2xl">
+              High-resolution analytical figures generated directly from the underlying Glasgow SCOOT and OpenStreetMap pipelines, alongside primary data licenses and offline reproduction protocols.
+            </p>
+          </div>
         </div>
 
-        {/* Section Filter Tags */}
-        <div className="flex items-center gap-1.5 flex-wrap border-b border-[#E5E0D8] pb-4 mb-8">
-          {SECTIONS.map(s => (
-            <button
-              key={s}
-              onClick={() => setActiveSection(s)}
-              className={`px-3 py-1.5 text-xs rounded transition-colors capitalize ${
-                activeSection === s
-                  ? 'bg-[#111827] text-white font-medium'
-                  : 'text-[#4B5563] hover:text-[#111827] hover:bg-[#F4F1EA]'
-              }`}
-            >
-              {s === 'all' ? 'All 6 Publication Figures' : s}
-            </button>
-          ))}
+        {/* ── Section filter tabs ── */}
+        <div className="flex items-center gap-0 border-b border-[#E2DDD5] mb-10">
+          {SECTION_FILTERS.map(s => {
+            const isActive = activeSection === s;
+            return (
+              <button
+                key={s}
+                onClick={() => setActiveSection(s)}
+                className={`relative px-4 py-2.5 text-xs font-medium capitalize transition-colors whitespace-nowrap ${
+                  isActive ? 'text-[#0D1117]' : 'text-[#718096] hover:text-[#0D1117]'
+                }`}
+              >
+                {s === 'all' ? 'All 6 Figures' : s}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-px bg-[#0D1117]" />
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        {/* 2-Column Responsive Figures Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        {/* ── Figures grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
           {filtered.map(fig => (
             <div
               key={fig.id}
-              className="border border-[#E5E0D8] bg-white rounded shadow-xs overflow-hidden flex flex-col group hover:border-[#111827] transition-all"
+              className="group border border-[#E2DDD5] bg-white rounded overflow-hidden flex flex-col hover:border-[#0D1117] transition-all cursor-pointer"
+              onClick={() => setModal(fig)}
             >
-              {/* Figure Image Container */}
-              <div
-                className="aspect-[16/10] bg-[#F4F1EA] relative overflow-hidden flex items-center justify-center cursor-pointer"
-                onClick={() => setModal(fig)}
-              >
+              {/* Figure thumbnail */}
+              <div className="relative bg-[#F2EEE6] overflow-hidden" style={{ aspectRatio: '16/10' }}>
                 <img
                   src={`./figures/${fig.filename}`}
                   alt={fig.title}
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
                   onError={e => {
-                    const img = e.target as HTMLImageElement;
-                    img.src = `/figures/${fig.filename}`;
+                    (e.target as HTMLImageElement).src = `/figures/${fig.filename}`;
                   }}
                 />
-                
-                {/* Enlarge Overlay Indicator */}
-                <div className="absolute inset-0 bg-[#111827]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-white/95 text-[#111827] text-xs font-medium shadow-sm border border-[#D1C9BE]">
-                    <ZoomIn size={14} className="text-[#C25E2E]" />
-                    <span>Click to Enlarge</span>
+                {/* Enlarge overlay */}
+                <div className="absolute inset-0 bg-[#0D1117]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-white/95 text-[#0D1117] text-[11px] font-medium border border-[#CEC8BD]">
+                    <ZoomIn size={13} className="text-[#C25E2E]" />
+                    Enlarge
                   </span>
                 </div>
-
-                <div className="absolute top-3 left-3">
-                  <span className="font-mono text-[11px] font-semibold px-2 py-0.5 rounded bg-white text-[#111827] border border-[#D1C9BE] shadow-xs">
+                {/* Figure number badge */}
+                <div className="absolute top-2 left-2">
+                  <span className="font-mono text-[10px] font-semibold px-2 py-0.5 rounded bg-[#0D1117] text-white">
                     {fig.figureNumber}
                   </span>
                 </div>
               </div>
 
-              {/* Caption & Title */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-serif text-base text-[#111827] mb-2 leading-snug">
-                    {fig.title}
-                  </h3>
-                  <p className="text-xs text-[#4B5563] leading-relaxed line-clamp-3">
-                    {fig.caption}
-                  </p>
-                </div>
-
-                <div className="pt-4 mt-4 border-t border-[#E5E0D8] flex items-center justify-between text-[11px] font-mono text-[#6B7280]">
-                  <span>{fig.section}</span>
-                  <button
-                    onClick={() => setModal(fig)}
-                    className="text-[#C25E2E] hover:underline font-medium"
-                  >
-                    View Details & Caption →
-                  </button>
+              {/* Caption */}
+              <div className="p-4 flex-1 flex flex-col">
+                <h3 className="font-serif text-sm text-[#0D1117] leading-snug mb-2">{fig.title}</h3>
+                <p className="text-[11px] text-[#4A5568] leading-relaxed line-clamp-3 flex-1">{fig.caption}</p>
+                <div className="pt-3 mt-3 border-t border-[#E2DDD5] flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-[#718096]">{fig.section}</span>
+                  <span className="text-[10px] font-mono text-[#C25E2E] group-hover:underline">View →</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Primary Data Provenance & Methodology Table */}
-        <div className="border border-[#E5E0D8] bg-white rounded shadow-xs p-6 sm:p-8 mb-12">
-          <div className="max-w-2xl mb-6">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#C25E2E] font-semibold">
-              Data & Licenses
-            </span>
-            <h3 className="font-serif text-xl text-[#111827] mt-1 mb-2">
-              Primary Data Provenance & Legal Licensing
-            </h3>
-            <p className="text-xs text-[#4B5563]">
-              All research data sources are archived under permissive open licenses for independent scientific auditing.
-            </p>
-          </div>
+        {/* ── Data Provenance ── */}
+        <div className="border-t border-[#E2DDD5] pt-10 mb-4">
+          <div className="text-section-label mb-4">Data & Licenses</div>
+          <h3 className="font-serif text-2xl text-[#0D1117] mb-6">Primary Data Provenance</h3>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 rounded border border-[#E5E0D8] bg-[#F4F1EA]">
-              <div className="font-serif font-semibold text-base text-[#111827] mb-1">
-                SCOOT Traffic Flow
-              </div>
-              <div className="text-xs font-mono text-[#C25E2E] mb-3">
-                Open Government Licence (OGL v3.0)
-              </div>
-              <p className="text-xs text-[#4B5563] leading-relaxed mb-4">
-                Raw Glasgow City Council / Transport Scotland inductive loop sensor observations archived on Zenodo.
-              </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#E2DDD5] rounded overflow-hidden mb-6">
+          {DATA_SOURCES.map((ds, i) => (
+            <div
+              key={ds.title}
+              className={`p-6 ${i > 0 ? 'border-l border-[#E2DDD5]' : ''}`}
+            >
+              <div className="font-serif font-medium text-base text-[#0D1117] mb-1">{ds.title}</div>
+              <div className="text-[10px] font-mono text-[#C25E2E] mb-3 uppercase tracking-wider">{ds.license}</div>
+              <p className="text-xs text-[#4A5568] leading-relaxed mb-4">{ds.desc}</p>
               <a
-                href="https://doi.org/10.5281/zenodo.12100278"
+                href={ds.link}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-mono text-[#111827] hover:text-[#C25E2E] transition-colors"
+                className="inline-flex items-center gap-1 text-[11px] font-mono text-[#0D1117] hover:text-[#C25E2E] transition-colors"
+                onClick={e => e.stopPropagation()}
               >
-                <span>DOI: 10.5281/zenodo.12100278</span>
-                <ExternalLink size={11} />
+                <span>{ds.linkLabel}</span>
+                <ExternalLink size={10} />
               </a>
             </div>
-
-            <div className="p-5 rounded border border-[#E5E0D8] bg-[#F4F1EA]">
-              <div className="font-serif font-semibold text-base text-[#111827] mb-1">
-                Road Network Topology
-              </div>
-              <div className="text-xs font-mono text-[#C25E2E] mb-3">
-                Open Database License (ODbL 1.0)
-              </div>
-              <p className="text-xs text-[#4B5563] leading-relaxed mb-4">
-                Cartographic road network graphs extracted via OSMnx. © OpenStreetMap contributors. 1,327 nodes, 3,201 edges.
-              </p>
-              <a
-                href="https://www.openstreetmap.org/copyright"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-mono text-[#111827] hover:text-[#C25E2E] transition-colors"
-              >
-                <span>OSM Attribution Guidelines</span>
-                <ExternalLink size={11} />
-              </a>
-            </div>
-
-            <div className="p-5 rounded border border-[#E5E0D8] bg-[#F4F1EA]">
-              <div className="font-serif font-semibold text-base text-[#111827] mb-1">
-                Software & Benchmarks
-              </div>
-              <div className="text-xs font-mono text-[#C25E2E] mb-3">
-                MIT License (Code)
-              </div>
-              <p className="text-xs text-[#4B5563] leading-relaxed mb-4">
-                Complete Python 3.13 analysis suite, automated unit tests (56/56 passing), simulation scripts, and React web app.
-              </p>
-              <a
-                href="https://github.com/gaanavreddy007/CityPulse"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-mono text-[#111827] hover:text-[#C25E2E] transition-colors"
-              >
-                <span>GitHub Repository</span>
-                <ExternalLink size={11} />
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
 
       </div>
 
-      {/* Modal Lightbox for High-Res Inspection */}
+      {/* ── Figure modal ── */}
       {modal && (
         <div
-          className="fixed inset-0 z-50 bg-[#111827]/80 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-50 bg-[#0D1117]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
           onClick={() => setModal(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-white rounded border border-[#D1C9BE] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+            className="relative max-w-5xl w-full bg-white rounded border border-[#CEC8BD] shadow-2xl overflow-hidden flex flex-col"
+            style={{ maxHeight: '90vh' }}
             onClick={e => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="p-4 border-b border-[#E5E0D8] flex items-center justify-between bg-[#F4F1EA]">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-white text-[#C25E2E] border border-[#E5E0D8]">
+            {/* Modal header */}
+            <div className="px-5 py-4 border-b border-[#E2DDD5] flex items-center justify-between bg-[#FAF8F4]">
+              <div className="flex items-center gap-2.5">
+                <span className="font-mono text-[10px] font-semibold px-2 py-0.5 rounded bg-[#0D1117] text-white">
                   {modal.figureNumber}
                 </span>
-                <span className="font-serif font-medium text-sm text-[#111827]">{modal.title}</span>
+                <span className="font-serif text-sm text-[#0D1117]">{modal.title}</span>
               </div>
               <button
                 onClick={() => setModal(null)}
-                className="p-1 rounded text-[#4B5563] hover:text-[#111827] hover:bg-[#E5E0D8]"
-                aria-label="Close image modal"
+                className="p-1.5 rounded text-[#4A5568] hover:text-[#0D1117] hover:bg-[#E2DDD5] transition-colors"
+                aria-label="Close"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            {/* Image Surface */}
-            <div className="p-4 bg-[#FBF9F5] overflow-auto flex-1 flex items-center justify-center">
+            {/* Image */}
+            <div className="flex-1 overflow-auto bg-[#F2EEE6] flex items-center justify-center p-4">
               <img
                 src={`./figures/${modal.filename}`}
                 alt={modal.title}
                 className="max-h-[60vh] object-contain rounded"
                 onError={e => {
-                  const img = e.target as HTMLImageElement;
-                  img.src = `/figures/${modal.filename}`;
+                  (e.target as HTMLImageElement).src = `/figures/${modal.filename}`;
                 }}
               />
             </div>
 
-            {/* Detailed Caption */}
-            <div className="p-5 border-t border-[#E5E0D8] bg-white text-xs text-[#374151] space-y-2">
-              <p className="leading-relaxed font-normal">
-                {modal.caption}
-              </p>
-              <div className="flex items-center justify-between text-[11px] font-mono text-[#6B7280] pt-2 border-t border-[#E5E0D8]">
+            {/* Caption */}
+            <div className="px-5 py-4 border-t border-[#E2DDD5] bg-white">
+              <p className="text-xs text-[#374151] leading-relaxed mb-2">{modal.caption}</p>
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#718096]">
                 <span>Section: {modal.section}</span>
-                <span>Filename: {modal.filename}</span>
+                <span>{modal.filename}</span>
               </div>
             </div>
           </div>
