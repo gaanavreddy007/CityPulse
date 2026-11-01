@@ -53,16 +53,16 @@ export const ClaimsView: React.FC = () => {
   }), [claimsWithRisk]);
 
   return (
-    <section id="claims" className="py-24 border-t border-[#E2DDD5]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section id="claims" className="py-16 lg:py-20 border-t border-[#E2DDD5]">
+      <div className="cp-container">
 
         {/* ── Section heading ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-8 items-end">
           <div className="lg:col-span-4">
-            <div className="text-section-label mb-3">05 · Scientific Epistemics</div>
+            <div className="text-section-label mb-2">05 · Scientific Epistemics</div>
             <h2 className="text-headline">Claims & Evidence Audit</h2>
           </div>
-          <div className="lg:col-span-8 flex items-end">
+          <div className="lg:col-span-8">
             <p className="text-sm text-[#4A5568] leading-relaxed max-w-2xl">
               A comprehensive line-by-line audit documenting each scientific finding, its overstatement risks, primary evidence artifacts, and the safe phrasing required for peer review and data-science portfolio evaluation.
             </p>
@@ -70,7 +70,7 @@ export const ClaimsView: React.FC = () => {
         </div>
 
         {/* ── Filter bar ── */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-y border-[#E2DDD5] py-4 mb-8">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-y border-[#E2DDD5] py-3 mb-6">
           {/* Search */}
           <div className="relative flex-1 max-w-sm">
             <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#718096]" />
@@ -92,7 +92,7 @@ export const ClaimsView: React.FC = () => {
                 <button
                   key={r}
                   onClick={() => setRiskFilter(r)}
-                  className={`px-3 py-1.5 text-[11px] font-mono capitalize rounded border transition-colors ${
+                  className={`px-2.5 py-1 text-[11px] font-mono capitalize rounded border transition-colors ${
                     isActive
                       ? 'bg-[#0D1117] text-white border-[#0D1117]'
                       : 'border-[#CEC8BD] text-[#4A5568] bg-white hover:border-[#0D1117]'
@@ -109,9 +109,9 @@ export const ClaimsView: React.FC = () => {
         </div>
 
         {/* ── Claims accordion list ── */}
-        <div className="divide-y divide-[#E2DDD5] border-t border-[#E2DDD5] mb-10">
+        <div className="divide-y divide-[#E2DDD5] border-t border-[#E2DDD5] mb-8">
           {filtered.length === 0 ? (
-            <div className="py-12 text-center text-xs text-[#718096] font-mono">
+            <div className="py-8 text-center text-xs text-[#718096] font-mono">
               No claims matching the selected filters.
             </div>
           ) : (
@@ -123,17 +123,17 @@ export const ClaimsView: React.FC = () => {
                 <div key={claim.claim_id} className="group">
                   <button
                     onClick={() => setExpanded(isExpanded ? null : claim.claim_id)}
-                    className="w-full text-left py-6 flex items-start justify-between gap-6 hover:bg-[#FAF8F4] transition-colors -mx-2 px-2 rounded"
+                    className="w-full text-left py-4 sm:py-5 flex items-start justify-between gap-4 hover:bg-[#FAF8F4] transition-colors -mx-2 px-2 rounded"
                   >
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
                         <span className="font-mono text-[10px] text-[#718096] font-semibold uppercase tracking-wider">
                           {claim.claim_id}
                         </span>
 
                         {/* Risk badge */}
                         <span
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-semibold border"
+                          className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold border"
                           style={{ color: cfg.color, backgroundColor: cfg.bg, borderColor: cfg.border }}
                         >
                           <Icon size={10} />
@@ -146,7 +146,7 @@ export const ClaimsView: React.FC = () => {
                         </span>
                       </div>
 
-                      <h3 className="font-serif text-lg text-[#0D1117] leading-snug mb-1.5">
+                      <h3 className="font-serif text-base sm:text-lg text-[#0D1117] leading-snug mb-1">
                         {claim.proposed_headline_claim}
                       </h3>
 
@@ -161,10 +161,10 @@ export const ClaimsView: React.FC = () => {
                   </button>
 
                   {isExpanded && (
-                    <div className="pb-6 -mx-2 px-2">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="border border-[#E8B9A2] bg-[#FDF0EA] rounded p-5">
-                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-semibold text-[#C25E2E] mb-2 uppercase tracking-wider">
+                    <div className="pb-4 -mx-2 px-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="border border-[#E8B9A2] bg-[#FDF0EA] rounded p-4">
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-semibold text-[#C25E2E] mb-1.5 uppercase tracking-wider">
                             <AlertTriangle size={12} />
                             Potential Overstatement Risk
                           </div>
@@ -173,8 +173,8 @@ export const ClaimsView: React.FC = () => {
                           </p>
                         </div>
 
-                        <div className="border border-[#A7F3D0] bg-[#ECFDF5] rounded p-5">
-                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-semibold text-[#065F46] mb-2 uppercase tracking-wider">
+                        <div className="border border-[#A7F3D0] bg-[#ECFDF5] rounded p-4">
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-semibold text-[#065F46] mb-1.5 uppercase tracking-wider">
                             <ShieldCheck size={12} />
                             Scientifically Safe Wording
                           </div>
@@ -192,12 +192,12 @@ export const ClaimsView: React.FC = () => {
         </div>
 
         {/* Verification protocol note */}
-        <div className="border-t border-[#E2DDD5] pt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-2">
+        <div className="border-t border-[#E2DDD5] pt-6 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-start">
+          <div className="lg:col-span-1 flex justify-center lg:justify-start pt-0.5">
             <ShieldCheck size={20} className="text-[#065F46]" />
           </div>
-          <div className="lg:col-span-10">
-            <div className="font-mono text-xs font-semibold text-[#0D1117] uppercase tracking-wider mb-2">
+          <div className="lg:col-span-11">
+            <div className="font-mono text-xs font-semibold text-[#0D1117] uppercase tracking-wider mb-1.5">
               Verification Protocol: REPRODUCED_OFFLINE Standard
             </div>
             <p className="text-xs text-[#4A5568] leading-relaxed max-w-3xl">

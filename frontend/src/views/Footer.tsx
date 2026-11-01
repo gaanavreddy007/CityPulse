@@ -4,10 +4,10 @@ import { GitFork, ArrowUpRight, ShieldCheck } from 'lucide-react';
 export const Footer: React.FC = () => {
   return (
     <footer className="border-t border-[#E2DDD5] bg-[#0D1117] text-[#9CA3AF]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-10">
+      <div className="cp-container pt-12 pb-8">
 
         {/* Top grid: identity + links */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12 pb-10 border-b border-[#1F2937]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8 pb-8 border-b border-[#1F2937]">
 
           {/* Identity column */}
           <div className="md:col-span-5 space-y-4">

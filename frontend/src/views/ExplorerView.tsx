@@ -97,32 +97,30 @@ export const ExplorerView: React.FC = () => {
   );
 
   return (
-    <section id="explorer" className="py-24 border-t border-[#E2DDD5]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section id="explorer" className="py-16 lg:py-20 border-t border-[#E2DDD5]">
+      <div className="cp-container">
 
         {/* ── Section heading ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-8 items-end">
           <div className="lg:col-span-4">
-            <div className="text-section-label mb-3">02 · Empirical Observations</div>
+            <div className="text-section-label mb-2">02 · Empirical Observations</div>
             <h2 className="text-headline">Sensor Flow Explorer</h2>
           </div>
-          <div className="lg:col-span-8 flex items-end">
-            <div>
-              <p className="text-sm text-[#4A5568] leading-relaxed mb-4 max-w-2xl">
-                Baseline flow profiles across representative SCOOT inductive loop detectors in Glasgow. Counts record vehicle passes per fixed logging interval under Open Government Licence.
-              </p>
-              {/* Methodology notes inline */}
-              <div className="flex flex-wrap gap-6 text-[11px] font-mono text-[#718096]">
-                <span><span className="text-[#0D1117] font-semibold">Metric:</span> Vehicle count / interval</span>
-                <span><span className="text-[#0D1117] font-semibold">Source:</span> Zenodo 10.5281/zenodo.12100278</span>
-                <span><span className="text-[#0D1117] font-semibold">Licence:</span> OGL v3.0</span>
-              </div>
+          <div className="lg:col-span-8">
+            <p className="text-sm text-[#4A5568] leading-relaxed mb-3 max-w-2xl">
+              Baseline flow profiles across representative SCOOT inductive loop detectors in Glasgow. Counts record vehicle passes per fixed logging interval under Open Government Licence.
+            </p>
+            {/* Methodology notes inline */}
+            <div className="flex flex-wrap gap-4 text-[11px] font-mono text-[#718096]">
+              <span><span className="text-[#0D1117] font-semibold">Metric:</span> Vehicle count / interval</span>
+              <span><span className="text-[#0D1117] font-semibold">Source:</span> Zenodo 10.5281/zenodo.12100278</span>
+              <span><span className="text-[#0D1117] font-semibold">Licence:</span> OGL v3.0</span>
             </div>
           </div>
         </div>
 
         {/* ── Controls bar ── */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-y border-[#E2DDD5] py-4 mb-8">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-y border-[#E2DDD5] py-3 mb-6">
           {/* Mode toggle */}
           <div className="flex items-center gap-1 border border-[#CEC8BD] p-0.5 rounded bg-[#F2EEE6]">
             {VIEW_MODES.map(({ id, label }) => (
@@ -153,7 +151,7 @@ export const ExplorerView: React.FC = () => {
                 <button
                   key={id}
                   onClick={() => toggleSensor(id)}
-                  className={`px-2.5 py-1 text-[11px] font-mono rounded border transition-all ${
+                  className={`px-2 py-1 text-[11px] font-mono rounded border transition-all ${
                     isSelected
                       ? 'border-transparent text-white font-semibold'
                       : 'border-[#CEC8BD] text-[#4A5568] bg-white hover:border-[#0D1117]'
@@ -168,12 +166,12 @@ export const ExplorerView: React.FC = () => {
         </div>
 
         {/* ── Chart ── */}
-        <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-10">
+        <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-8">
 
           {/* Chart header */}
-          <div className="px-6 py-5 border-b border-[#E2DDD5] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+          <div className="px-5 py-4 border-b border-[#E2DDD5] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
             <div>
-              <h3 className="font-serif text-xl text-[#0D1117]">
+              <h3 className="font-serif text-lg text-[#0D1117]">
                 {viewMode === 'diurnal' && 'Mean Diurnal Traffic Flow by Hour'}
                 {viewMode === 'weekly'  && 'Continuous 7-Day Time-Series Window'}
                 {viewMode === 'stats'   && 'Comparative Detector Characteristics'}
@@ -189,8 +187,8 @@ export const ExplorerView: React.FC = () => {
             </span>
           </div>
 
-          <div className="p-6">
-            <div className="h-[340px] w-full">
+          <div className="p-4 sm:p-5">
+            <div className="h-[280px] sm:h-[320px] lg:h-[350px] w-full min-w-0">
               <ResponsiveContainer width="100%" height="100%">
                 {viewMode === 'diurnal' ? (
                   <LineChart data={diurnalData} margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>

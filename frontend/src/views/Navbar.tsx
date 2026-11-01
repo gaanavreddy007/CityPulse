@@ -33,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNav }) => {
           : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-13 flex items-center justify-between" style={{ height: '3.25rem' }}>
+      <div className="cp-container h-13 flex items-center justify-between" style={{ height: '3.25rem' }}>
 
         {/* Wordmark */}
         <button

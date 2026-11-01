@@ -96,16 +96,16 @@ export const FiguresView: React.FC = () => {
     : FIGURES.filter(f => f.section === activeSection);
 
   return (
-    <section id="figures" className="py-24 border-t border-[#E2DDD5]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section id="figures" className="py-16 lg:py-20 border-t border-[#E2DDD5]">
+      <div className="cp-container">
 
         {/* ── Section heading ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-8 items-end">
           <div className="lg:col-span-4">
-            <div className="text-section-label mb-3">06 · Publication Figures & Provenance</div>
+            <div className="text-section-label mb-2">06 · Publication Figures & Provenance</div>
             <h2 className="text-headline">Research Figures</h2>
           </div>
-          <div className="lg:col-span-8 flex items-end">
+          <div className="lg:col-span-8">
             <p className="text-sm text-[#4A5568] leading-relaxed max-w-2xl">
               High-resolution analytical figures generated directly from the underlying Glasgow SCOOT and OpenStreetMap pipelines, alongside primary data licenses and offline reproduction protocols.
             </p>
@@ -113,14 +113,14 @@ export const FiguresView: React.FC = () => {
         </div>
 
         {/* ── Section filter tabs ── */}
-        <div className="flex items-center gap-0 border-b border-[#E2DDD5] mb-10">
+        <div className="flex items-center gap-0 border-b border-[#E2DDD5] mb-8 overflow-x-auto">
           {SECTION_FILTERS.map(s => {
             const isActive = activeSection === s;
             return (
               <button
                 key={s}
                 onClick={() => setActiveSection(s)}
-                className={`relative px-4 py-2.5 text-xs font-medium capitalize transition-colors whitespace-nowrap ${
+                className={`relative px-3.5 py-2 text-xs font-medium capitalize transition-colors whitespace-nowrap ${
                   isActive ? 'text-[#0D1117]' : 'text-[#718096] hover:text-[#0D1117]'
                 }`}
               >
@@ -134,7 +134,7 @@ export const FiguresView: React.FC = () => {
         </div>
 
         {/* ── Figures grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
           {filtered.map(fig => (
             <div
               key={fig.id}
@@ -167,10 +167,10 @@ export const FiguresView: React.FC = () => {
               </div>
 
               {/* Caption */}
-              <div className="p-4 flex-1 flex flex-col">
-                <h3 className="font-serif text-sm text-[#0D1117] leading-snug mb-2">{fig.title}</h3>
+              <div className="p-3.5 flex-1 flex flex-col">
+                <h3 className="font-serif text-sm text-[#0D1117] leading-snug mb-1.5">{fig.title}</h3>
                 <p className="text-[11px] text-[#4A5568] leading-relaxed line-clamp-3 flex-1">{fig.caption}</p>
-                <div className="pt-3 mt-3 border-t border-[#E2DDD5] flex items-center justify-between">
+                <div className="pt-2.5 mt-2.5 border-t border-[#E2DDD5] flex items-center justify-between">
                   <span className="font-mono text-[10px] text-[#718096]">{fig.section}</span>
                   <span className="text-[10px] font-mono text-[#C25E2E] group-hover:underline">View →</span>
                 </div>
@@ -180,20 +180,20 @@ export const FiguresView: React.FC = () => {
         </div>
 
         {/* ── Data Provenance ── */}
-        <div className="border-t border-[#E2DDD5] pt-10 mb-4">
-          <div className="text-section-label mb-4">Data & Licenses</div>
-          <h3 className="font-serif text-2xl text-[#0D1117] mb-6">Primary Data Provenance</h3>
+        <div className="border-t border-[#E2DDD5] pt-8 mb-3">
+          <div className="text-section-label mb-2">Data & Licenses</div>
+          <h3 className="font-serif text-xl sm:text-2xl text-[#0D1117] mb-5">Primary Data Provenance</h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#E2DDD5] rounded overflow-hidden mb-6">
           {DATA_SOURCES.map((ds, i) => (
             <div
               key={ds.title}
-              className={`p-6 ${i > 0 ? 'border-l border-[#E2DDD5]' : ''}`}
+              className={`p-5 ${i > 0 ? 'md:border-l border-t md:border-t-0 border-[#E2DDD5]' : ''}`}
             >
-              <div className="font-serif font-medium text-base text-[#0D1117] mb-1">{ds.title}</div>
-              <div className="text-[10px] font-mono text-[#C25E2E] mb-3 uppercase tracking-wider">{ds.license}</div>
-              <p className="text-xs text-[#4A5568] leading-relaxed mb-4">{ds.desc}</p>
+              <div className="font-serif font-medium text-base text-[#0D1117] mb-0.5">{ds.title}</div>
+              <div className="text-[10px] font-mono text-[#C25E2E] mb-2 uppercase tracking-wider">{ds.license}</div>
+              <p className="text-xs text-[#4A5568] leading-relaxed mb-3">{ds.desc}</p>
               <a
                 href={ds.link}
                 target="_blank"

@@ -113,16 +113,16 @@ export const AnomalyView: React.FC = () => {
   );
 
   return (
-    <section id="anomaly" className="py-24 border-t border-[#E2DDD5]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section id="anomaly" className="py-16 lg:py-20 border-t border-[#E2DDD5]">
+      <div className="cp-container">
 
         {/* ── Section heading ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-8 items-end">
           <div className="lg:col-span-4">
-            <div className="text-section-label mb-3">03 · Algorithmic Benchmarks</div>
+            <div className="text-section-label mb-2">03 · Algorithmic Benchmarks</div>
             <h2 className="text-headline">Anomaly Detection Lab</h2>
           </div>
-          <div className="lg:col-span-8 flex items-end">
+          <div className="lg:col-span-8">
             <p className="text-sm text-[#4A5568] leading-relaxed max-w-2xl">
               Benchmarking statistical and machine-learning anomaly detectors against controlled synthetic corruptions — step offsets, multiplicative scale drift, and zero dropouts — evaluated strictly on synthetic ground-truth labels.
             </p>
@@ -130,7 +130,7 @@ export const AnomalyView: React.FC = () => {
         </div>
 
         {/* ── Tab bar ── */}
-        <div className="flex items-center gap-0 border-b border-[#E2DDD5] mb-8">
+        <div className="flex items-center gap-0 border-b border-[#E2DDD5] mb-6">
           {[
             { id: 'benchmarks', label: 'Corruption Benchmarks', meta: '60 Scenarios' },
             { id: 'spatial',    label: 'Spatial Cross-Consistency', meta: '30 Scenarios' },
@@ -140,7 +140,7 @@ export const AnomalyView: React.FC = () => {
               <button
                 key={id}
                 onClick={() => setTab(id as any)}
-                className={`relative px-5 py-3 text-xs font-medium transition-colors ${
+                className={`relative px-4 py-2.5 text-xs font-medium transition-colors ${
                   isActive ? 'text-[#0D1117]' : 'text-[#718096] hover:text-[#0D1117]'
                 }`}
               >
@@ -157,14 +157,14 @@ export const AnomalyView: React.FC = () => {
         {tab === 'benchmarks' && (
           <>
             {/* Filters */}
-            <div className="flex flex-wrap items-start justify-between gap-6 py-4 border-y border-[#E2DDD5] mb-8">
+            <div className="flex flex-wrap items-start justify-between gap-4 py-3 border-y border-[#E2DDD5] mb-6">
               <div className="flex items-center gap-2 flex-wrap text-xs">
                 <span className="font-mono text-[10px] text-[#718096] uppercase tracking-wider">Model:</span>
                 {['all', ...MODELS].map(m => (
                   <button
                     key={m}
                     onClick={() => setSelectedModel(m)}
-                    className={`px-2.5 py-1 text-[11px] font-mono rounded border transition-colors ${
+                    className={`px-2 py-1 text-[11px] font-mono rounded border transition-colors ${
                       selectedModel === m
                         ? 'border-[#0D1117] bg-[#0D1117] text-white'
                         : 'border-[#CEC8BD] text-[#4A5568] bg-white hover:border-[#0D1117]'
@@ -180,7 +180,7 @@ export const AnomalyView: React.FC = () => {
                   <button
                     key={c}
                     onClick={() => setSelectedTask(c)}
-                    className={`px-2.5 py-1 text-[11px] font-mono rounded border transition-colors ${
+                    className={`px-2 py-1 text-[11px] font-mono rounded border transition-colors ${
                       selectedTask === c
                         ? 'border-[#C25E2E] bg-[#C25E2E] text-white'
                         : 'border-[#CEC8BD] text-[#4A5568] bg-white hover:border-[#C25E2E]'
@@ -193,18 +193,18 @@ export const AnomalyView: React.FC = () => {
             </div>
 
             {/* Scatter + table grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
 
               {/* Scatter chart */}
               <div className="lg:col-span-7 bg-white border border-[#E2DDD5] rounded overflow-hidden">
-                <div className="px-6 py-5 border-b border-[#E2DDD5]">
-                  <h3 className="font-serif text-xl text-[#0D1117]">PR-AUC vs. Recall Tradeoff</h3>
+                <div className="px-5 py-4 border-b border-[#E2DDD5]">
+                  <h3 className="font-serif text-lg text-[#0D1117]">PR-AUC vs. Recall Tradeoff</h3>
                   <p className="text-xs text-[#718096] mt-0.5">
-                    Precision-Recall AUC against Recall across benchmark scenarios. Top-right = superior class-imbalance recovery.
+                    Precision-Recall AUC against Recall across benchmark scenarios. Top-right = superior recovery.
                   </p>
                 </div>
-                <div className="p-6">
-                  <div className="h-[280px] w-full">
+                <div className="p-4 sm:p-5">
+                  <div className="h-[260px] sm:h-[280px] w-full min-w-0">
                     <ResponsiveContainer width="100%" height="100%">
                       <ScatterChart margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
                         <CartesianGrid strokeDasharray="2 2" />
@@ -229,10 +229,10 @@ export const AnomalyView: React.FC = () => {
                     </ResponsiveContainer>
                   </div>
                   {/* Legend */}
-                  <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#E2DDD5] text-[11px] font-mono text-[#4A5568]">
+                  <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#E2DDD5] text-[11px] font-mono text-[#4A5568]">
                     {MODELS.map(m => (
                       <div key={m} className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: MODEL_COLORS[m] || '#1E3A8A' }} />
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: MODEL_COLORS[m] || '#1E3A8A' }} />
                         <span>{m.replace(/_/g, ' ')}</span>
                       </div>
                     ))}
@@ -242,33 +242,33 @@ export const AnomalyView: React.FC = () => {
 
               {/* Aggregate rankings table */}
               <div className="lg:col-span-5 bg-white border border-[#E2DDD5] rounded overflow-hidden">
-                <div className="px-6 py-5 border-b border-[#E2DDD5]">
-                  <h3 className="font-serif text-xl text-[#0D1117]">Model Rankings</h3>
+                <div className="px-5 py-4 border-b border-[#E2DDD5]">
+                  <h3 className="font-serif text-lg text-[#0D1117]">Model Rankings</h3>
                   <p className="text-xs text-[#718096] mt-0.5">Mean metrics averaged across all corruption regimes.</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs">
                     <thead>
                       <tr className="border-b border-[#CEC8BD] text-[#718096] font-mono text-[10px]">
-                        <th className="text-left py-3 px-6 font-medium">Model</th>
-                        <th className="text-right py-3 px-3 font-medium">PR-AUC</th>
-                        <th className="text-right py-3 px-3 font-medium">Recall</th>
-                        <th className="text-right py-3 px-6 font-medium">FPR</th>
+                        <th className="text-left py-2.5 px-4 font-medium">Model</th>
+                        <th className="text-right py-2.5 px-2.5 font-medium">PR-AUC</th>
+                        <th className="text-right py-2.5 px-2.5 font-medium">Recall</th>
+                        <th className="text-right py-2.5 px-4 font-medium">FPR</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#E2DDD5] font-mono">
                       {modelAggregates.map((agg, idx) => (
                         <tr key={agg.model} className="hover:bg-[#FAF8F4] transition-colors">
-                          <td className="py-3 px-6 font-medium text-[#0D1117]">
-                            <div className="flex items-center gap-2">
+                          <td className="py-2.5 px-4 font-medium text-[#0D1117]">
+                            <div className="flex items-center gap-1.5">
                               <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: MODEL_COLORS[agg.model] }} />
-                              <span className="text-[11px]">{agg.model.replace(/_/g, ' ')}</span>
+                              <span className="text-[11px] truncate">{agg.model.replace(/_/g, ' ')}</span>
                               {idx === 0 && <span className="text-[9px] font-mono font-semibold text-[#C25E2E] ml-1">BEST</span>}
                             </div>
                           </td>
-                          <td className="py-3 px-3 text-right font-semibold text-[#0D1117] text-[11px]">{agg.pr_auc.toFixed(3)}</td>
-                          <td className="py-3 px-3 text-right text-[#4A5568] text-[11px]">{agg.recall.toFixed(3)}</td>
-                          <td className="py-3 px-6 text-right text-[#C25E2E] text-[11px]">{agg.fpr.toFixed(3)}</td>
+                          <td className="py-2.5 px-2.5 text-right font-semibold text-[#0D1117] text-[11px]">{agg.pr_auc.toFixed(3)}</td>
+                          <td className="py-2.5 px-2.5 text-right text-[#4A5568] text-[11px]">{agg.recall.toFixed(3)}</td>
+                          <td className="py-2.5 px-4 text-right text-[#C25E2E] text-[11px]">{agg.fpr.toFixed(3)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -278,39 +278,39 @@ export const AnomalyView: React.FC = () => {
             </div>
 
             {/* Scenario ledger */}
-            <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-8">
-              <div className="px-6 py-4 border-b border-[#E2DDD5] flex items-baseline justify-between">
+            <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-6">
+              <div className="px-5 py-3 border-b border-[#E2DDD5] flex items-baseline justify-between">
                 <h3 className="font-serif text-base text-[#0D1117]">Benchmark Scenario Ledger</h3>
                 <span className="text-xs font-mono text-[#718096]">
                   {Math.min(15, filtered.length)} of {filtered.length} scenarios
                 </span>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-xs min-w-[700px]">
+                <table className="w-full text-xs min-w-[650px]">
                   <thead>
                     <tr className="bg-[#FAF8F4] text-[#718096] font-mono text-[10px] border-b border-[#CEC8BD]">
-                      <th className="text-left py-2.5 px-6 font-medium">Model</th>
-                      <th className="text-left py-2.5 px-3 font-medium">Category</th>
-                      <th className="text-left py-2.5 px-3 font-medium">Corruption Description</th>
-                      <th className="text-right py-2.5 px-3 font-medium">PR-AUC</th>
-                      <th className="text-right py-2.5 px-3 font-medium">Recall</th>
-                      <th className="text-right py-2.5 px-6 font-medium">FPR</th>
+                      <th className="text-left py-2 px-4 font-medium">Model</th>
+                      <th className="text-left py-2 px-2.5 font-medium">Category</th>
+                      <th className="text-left py-2 px-2.5 font-medium">Corruption Description</th>
+                      <th className="text-right py-2 px-2.5 font-medium">PR-AUC</th>
+                      <th className="text-right py-2 px-2.5 font-medium">Recall</th>
+                      <th className="text-right py-2 px-4 font-medium">FPR</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#E2DDD5] font-mono text-[11px]">
                     {filtered.slice(0, 15).map((b, i) => (
                       <tr key={i} className="hover:bg-[#FAF8F4] transition-colors">
-                        <td className="py-2.5 px-6 font-medium text-[#0D1117]">
+                        <td className="py-2 px-4 font-medium text-[#0D1117]">
                           <div className="flex items-center gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: MODEL_COLORS[b.model] }} />
                             {b.model.replace(/_/g, ' ')}
                           </div>
                         </td>
-                        <td className="py-2.5 px-3 text-[#4A5568]">{b.task_category}</td>
-                        <td className="py-2.5 px-3 text-[#1A202C] font-sans max-w-[200px] truncate">{b.corruption_desc}</td>
-                        <td className="py-2.5 px-3 text-right font-semibold text-[#0D1117]">{b.pr_auc_mean.toFixed(3)}</td>
-                        <td className="py-2.5 px-3 text-right text-[#4A5568]">{b.recall_mean.toFixed(3)}</td>
-                        <td className="py-2.5 px-6 text-right text-[#C25E2E]">{b.fpr_mean.toFixed(3)}</td>
+                        <td className="py-2 px-2.5 text-[#4A5568]">{b.task_category}</td>
+                        <td className="py-2 px-2.5 text-[#1A202C] font-sans max-w-[200px] truncate">{b.corruption_desc}</td>
+                        <td className="py-2 px-2.5 text-right font-semibold text-[#0D1117]">{b.pr_auc_mean.toFixed(3)}</td>
+                        <td className="py-2 px-2.5 text-right text-[#4A5568]">{b.recall_mean.toFixed(3)}</td>
+                        <td className="py-2 px-4 text-right text-[#C25E2E]">{b.fpr_mean.toFixed(3)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -321,16 +321,16 @@ export const AnomalyView: React.FC = () => {
         )}
 
         {tab === 'spatial' && (
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden">
-              <div className="px-6 py-5 border-b border-[#E2DDD5]">
-                <h3 className="font-serif text-xl text-[#0D1117]">Spatial Cross-Consistency & Neighbour Drift</h3>
+              <div className="px-5 py-4 border-b border-[#E2DDD5]">
+                <h3 className="font-serif text-lg text-[#0D1117]">Spatial Cross-Consistency & Neighbour Drift</h3>
                 <p className="text-xs text-[#718096] mt-0.5">
                   Bivariate correlation tracking between neighbouring detectors — isolating sensor drift from macro city-wide volume dips.
                 </p>
               </div>
-              <div className="p-6">
-                <div className="h-[300px] w-full">
+              <div className="p-4 sm:p-5">
+                <div className="h-[280px] w-full min-w-0">
                   <ResponsiveContainer width="100%" height="100%">
                     <ScatterChart margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
                       <CartesianGrid strokeDasharray="2 2" />

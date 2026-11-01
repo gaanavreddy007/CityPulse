@@ -89,16 +89,16 @@ export const NetworkView: React.FC = () => {
   );
 
   return (
-    <section id="network" className="py-24 border-t border-[#E2DDD5]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section id="network" className="py-16 lg:py-20 border-t border-[#E2DDD5]">
+      <div className="cp-container">
 
         {/* ── Section heading ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-8 items-end">
           <div className="lg:col-span-4">
-            <div className="text-section-label mb-3">04 · Graph Topology & Resilience</div>
+            <div className="text-section-label mb-2">04 · Graph Topology & Resilience</div>
             <h2 className="text-headline">Network Resilience Simulator</h2>
           </div>
-          <div className="lg:col-span-8 flex items-end">
+          <div className="lg:col-span-8">
             <p className="text-sm text-[#4A5568] leading-relaxed max-w-2xl">
               Monte Carlo Dijkstra simulations evaluating rerouting cost and unreachable origin-destination pairs under simulated closures of major River Clyde crossings. Modelled at free-flow legal speed limits — not dynamic congestion queues.
             </p>
@@ -106,19 +106,19 @@ export const NetworkView: React.FC = () => {
         </div>
 
         {/* ── Key finding callout — editorial asymmetry ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8 items-start">
 
           {/* Chart surface */}
           <div className="lg:col-span-8 bg-white border border-[#E2DDD5] rounded overflow-hidden">
-            <div className="px-6 py-5 border-b border-[#E2DDD5] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="px-5 py-4 border-b border-[#E2DDD5] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="font-serif text-xl text-[#0D1117]">Cross-River Closure Impact</h3>
+                <h3 className="font-serif text-lg text-[#0D1117]">Cross-River Closure Impact</h3>
                 <p className="text-xs text-[#718096] mt-0.5">
                   Modelled free-flow resistance increase across 218,401 cross-river node pairs.
                 </p>
               </div>
               {/* Controls */}
-              <div className="flex items-center gap-3 flex-wrap">
+              <div className="flex items-center gap-2.5 flex-wrap">
                 <div className="flex items-center border border-[#CEC8BD] p-0.5 rounded bg-[#F2EEE6] text-xs">
                   <button
                     onClick={() => setMetric('mean_delta')}
@@ -147,10 +147,10 @@ export const NetworkView: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="p-6">
-              <div className="h-[320px] w-full">
+            <div className="p-4 sm:p-5">
+              <div className="h-[280px] sm:h-[320px] w-full min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 48, left: 0 }}>
+                  <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 44, left: 0 }}>
                     <CartesianGrid strokeDasharray="2 2" vertical={false} />
                     <XAxis
                       dataKey="label"
@@ -176,15 +176,15 @@ export const NetworkView: React.FC = () => {
 
           {/* Couplet asymmetry callout */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="bg-[#FAF8F4] border border-[#E2DDD5] rounded p-6">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#C25E2E] font-semibold mb-3">
+            <div className="bg-[#FAF8F4] border border-[#E2DDD5] rounded p-5">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#C25E2E] font-semibold mb-2">
                 <Navigation size={13} />
                 <span>Couplet Asymmetry Finding</span>
               </div>
-              <h4 className="font-serif text-lg text-[#0D1117] leading-snug mb-3">
+              <h4 className="font-serif text-base text-[#0D1117] leading-snug mb-2">
                 King George V vs. Glasgow Bridge
               </h4>
-              <div className="text-xs text-[#4A5568] space-y-2.5 leading-relaxed">
+              <div className="text-xs text-[#4A5568] space-y-2 leading-relaxed">
                 <p>
                   In central Glasgow, King George V Bridge operates strictly <strong className="text-[#0D1117]">northbound</strong>; Glasgow Bridge operates strictly <strong className="text-[#0D1117]">southbound</strong>.
                 </p>
@@ -195,14 +195,14 @@ export const NetworkView: React.FC = () => {
                   Even when both bridges are severed simultaneously, 100.0% of OD pairs remain reachable via Victoria and Kingston crossings.
                 </p>
               </div>
-              <div className="pt-3 mt-3 border-t border-[#E2DDD5] text-[10px] font-mono text-[#718096]">
+              <div className="pt-2.5 mt-2.5 border-t border-[#E2DDD5] text-[10px] font-mono text-[#718096]">
                 OSM Graph · 1,327 nodes · 3,201 edges
               </div>
             </div>
 
             {/* Small fig6 preview */}
             <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden">
-              <div className="bg-[#F2EEE6] p-2 flex items-center justify-center" style={{ height: '120px' }}>
+              <div className="bg-[#F2EEE6] p-2 flex items-center justify-center" style={{ height: '110px' }}>
                 <img
                   src="./figures/fig6_cross_river_resilience_deltas.png"
                   alt="Cross-river resilience deltas"
@@ -212,7 +212,7 @@ export const NetworkView: React.FC = () => {
                   }}
                 />
               </div>
-              <div className="px-3 py-2 border-t border-[#E2DDD5]">
+              <div className="px-3 py-1.5 border-t border-[#E2DDD5]">
                 <p className="font-mono text-[10px] text-[#718096]">Fig. 6 · Cross-River Resilience Deltas</p>
               </div>
             </div>
@@ -220,41 +220,41 @@ export const NetworkView: React.FC = () => {
         </div>
 
         {/* ── Resilience results ledger ── */}
-        <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-8">
-          <div className="px-6 py-4 border-b border-[#E2DDD5] flex items-baseline justify-between">
+        <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-6">
+          <div className="px-5 py-3 border-b border-[#E2DDD5] flex items-baseline justify-between">
             <h3 className="font-serif text-base text-[#0D1117]">Simulation Scenario Ledger</h3>
             <span className="text-xs font-mono text-[#718096]">
               Dijkstra · {selectedDraws.toLocaleString()} Monte Carlo draws
             </span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-xs min-w-[700px]">
+            <table className="w-full text-xs min-w-[650px]">
               <thead>
                 <tr className="bg-[#FAF8F4] text-[#718096] font-mono text-[10px] border-b border-[#CEC8BD]">
-                  <th className="text-left py-2.5 px-6 font-medium">Bridge Closure Scenario</th>
-                  <th className="text-right py-2.5 px-3 font-medium">Mean Δ Time (s)</th>
-                  <th className="text-right py-2.5 px-3 font-medium">95% CI Lower</th>
-                  <th className="text-right py-2.5 px-3 font-medium">95% CI Upper</th>
-                  <th className="text-right py-2.5 px-3 font-medium">Disconnected ODs</th>
-                  <th className="text-right py-2.5 px-3 font-medium">Total ODs</th>
-                  <th className="text-right py-2.5 px-6 font-medium">% Severed</th>
+                  <th className="text-left py-2 px-4 font-medium">Bridge Closure Scenario</th>
+                  <th className="text-right py-2 px-2.5 font-medium">Mean Δ Time (s)</th>
+                  <th className="text-right py-2 px-2.5 font-medium">95% CI Lower</th>
+                  <th className="text-right py-2 px-2.5 font-medium">95% CI Upper</th>
+                  <th className="text-right py-2 px-2.5 font-medium">Disconnected ODs</th>
+                  <th className="text-right py-2 px-2.5 font-medium">Total ODs</th>
+                  <th className="text-right py-2 px-4 font-medium">% Severed</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E2DDD5] font-mono text-[11px]">
                 {filteredResilience.map((r, i) => (
                   <tr key={i} className="hover:bg-[#FAF8F4] transition-colors">
-                    <td className="py-2.5 px-6 font-medium text-[#0D1117]">
-                      <div className="flex items-center gap-2">
+                    <td className="py-2 px-4 font-medium text-[#0D1117]">
+                      <div className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full" style={{ backgroundColor: SCENARIO_COLORS[i % SCENARIO_COLORS.length] }} />
-                        <span>{scenarioLabel(r.scenario_name)}</span>
+                        <span className="truncate">{scenarioLabel(r.scenario_name)}</span>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 text-right font-semibold text-[#C25E2E]">+{r.mean_delta_cost.toFixed(2)} s</td>
-                    <td className="py-2.5 px-3 text-right text-[#4A5568]">{r.ci_lower_2_5.toFixed(2)}</td>
-                    <td className="py-2.5 px-3 text-right text-[#4A5568]">{r.ci_upper_97_5.toFixed(2)}</td>
-                    <td className="py-2.5 px-3 text-right font-medium text-[#0D1117]">{r.disconnected_od_count.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-[#718096]">{r.total_od_count.toLocaleString()}</td>
-                    <td className="py-2.5 px-6 text-right text-[#B45309]">
+                    <td className="py-2 px-2.5 text-right font-semibold text-[#C25E2E]">+{r.mean_delta_cost.toFixed(2)} s</td>
+                    <td className="py-2 px-2.5 text-right text-[#4A5568]">{r.ci_lower_2_5.toFixed(2)}</td>
+                    <td className="py-2 px-2.5 text-right text-[#4A5568]">{r.ci_upper_97_5.toFixed(2)}</td>
+                    <td className="py-2 px-2.5 text-right font-medium text-[#0D1117]">{r.disconnected_od_count.toLocaleString()}</td>
+                    <td className="py-2 px-2.5 text-right text-[#718096]">{r.total_od_count.toLocaleString()}</td>
+                    <td className="py-2 px-4 text-right text-[#B45309]">
                       {((r.disconnected_od_count / r.total_od_count) * 100).toFixed(2)}%
                     </td>
                   </tr>
@@ -265,8 +265,8 @@ export const NetworkView: React.FC = () => {
         </div>
 
         {/* ── Bridge edge inventory ── */}
-        <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-8">
-          <div className="px-6 py-4 border-b border-[#E2DDD5] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="bg-white border border-[#E2DDD5] rounded overflow-hidden mb-6">
+          <div className="px-5 py-3 border-b border-[#E2DDD5] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <div>
               <h3 className="font-serif text-base text-[#0D1117]">River Clyde Crossing Edge Inventory</h3>
               <p className="text-xs text-[#718096]">Directed edges in the OSM graph.</p>
@@ -277,7 +277,7 @@ export const NetworkView: React.FC = () => {
                 <button
                   key={n}
                   onClick={() => setBridgeFilter(n)}
-                  className={`px-2.5 py-1 text-[11px] font-mono rounded border transition-colors ${
+                  className={`px-2 py-0.5 text-[11px] font-mono rounded border transition-colors ${
                     bridgeFilter === n
                       ? 'border-[#0D1117] bg-[#0D1117] text-white'
                       : 'border-[#CEC8BD] text-[#4A5568] bg-white hover:border-[#0D1117]'
@@ -292,23 +292,23 @@ export const NetworkView: React.FC = () => {
             <table className="w-full text-xs min-w-[650px]">
               <thead>
                 <tr className="bg-[#FAF8F4] text-[#718096] font-mono text-[10px] border-b border-[#CEC8BD]">
-                  <th className="text-left py-2 px-6 font-medium">Bridge Name</th>
-                  <th className="text-left py-2 px-3 font-medium">Edge ID</th>
-                  <th className="text-left py-2 px-3 font-medium">Highway Class</th>
-                  <th className="text-right py-2 px-3 font-medium">Length (m)</th>
-                  <th className="text-right py-2 px-3 font-medium">Speed (m/s)</th>
-                  <th className="text-right py-2 px-6 font-medium">Free-Flow (s)</th>
+                  <th className="text-left py-2 px-4 font-medium">Bridge Name</th>
+                  <th className="text-left py-2 px-2.5 font-medium">Edge ID</th>
+                  <th className="text-left py-2 px-2.5 font-medium">Highway Class</th>
+                  <th className="text-right py-2 px-2.5 font-medium">Length (m)</th>
+                  <th className="text-right py-2 px-2.5 font-medium">Speed (m/s)</th>
+                  <th className="text-right py-2 px-4 font-medium">Free-Flow (s)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E2DDD5] font-mono text-[11px]">
                 {filteredBridges.slice(0, 12).map((b, i) => (
                   <tr key={i} className="hover:bg-[#FAF8F4] transition-colors">
-                    <td className="py-2 px-6 font-medium text-[#0D1117]">{b.name}</td>
-                    <td className="py-2 px-3 text-[#718096]">{b.edge_id}</td>
-                    <td className="py-2 px-3 text-[#4A5568]">{b.highway}</td>
-                    <td className="py-2 px-3 text-right text-[#0D1117]">{b.length_m.toFixed(1)}</td>
-                    <td className="py-2 px-3 text-right text-[#4A5568]">{b.speed_mps.toFixed(1)}</td>
-                    <td className="py-2 px-6 text-right font-medium text-[#0D1117]">{b.free_flow_time_sec.toFixed(1)}</td>
+                    <td className="py-2 px-4 font-medium text-[#0D1117]">{b.name}</td>
+                    <td className="py-2 px-2.5 text-[#718096]">{b.edge_id}</td>
+                    <td className="py-2 px-2.5 text-[#4A5568]">{b.highway}</td>
+                    <td className="py-2 px-2.5 text-right text-[#0D1117]">{b.length_m.toFixed(1)}</td>
+                    <td className="py-2 px-2.5 text-right text-[#4A5568]">{b.speed_mps.toFixed(1)}</td>
+                    <td className="py-2 px-4 text-right font-medium text-[#0D1117]">{b.free_flow_time_sec.toFixed(1)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -317,7 +317,7 @@ export const NetworkView: React.FC = () => {
         </div>
 
         {/* Boundary note */}
-        <div className="border-t border-[#E2DDD5] pt-6 flex items-start gap-3 text-xs text-[#4A5568]">
+        <div className="border-t border-[#E2DDD5] pt-5 flex items-start gap-2.5 text-xs text-[#4A5568]">
           <Info size={14} className="text-[#C25E2E] shrink-0 mt-0.5" />
           <p className="leading-relaxed max-w-3xl">
             <span className="font-semibold text-[#0D1117]">Boundary Truncation Note: </span>
